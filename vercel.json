@@ -1,6 +1,6 @@
 {
+  "version": 2,
   "buildCommand": "npm run vercel-build",
-  "outputDirectory": "public",
   "rewrites": [
     {
       "source": "/(.*)",
@@ -8,8 +8,7 @@
     }
   ],
   "functions": {
-    "api/**/*.ts": {
-      "includeFiles": "dist/bin/**",
+    "api/index.ts": {
       "maxDuration": 60
     }
   }
