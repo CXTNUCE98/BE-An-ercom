@@ -9,6 +9,7 @@ import { ProductCategoryModule } from './product-category/product-category.modul
 import { ProductModule } from './product/product.module';
 import { OrderModule } from './order/order.module';
 import { DashboardModule } from './dashboard/dashboard.module';
+import { UploadModule } from './upload/upload.module';
 
 /**
  * Module gốc của ứng dụng An-ercom
@@ -23,6 +24,7 @@ import { DashboardModule } from './dashboard/dashboard.module';
     ProductModule,
     OrderModule,
     DashboardModule,
+    UploadModule,
   ],
   controllers: [AppController],
   providers: [AppService],

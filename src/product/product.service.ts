@@ -5,7 +5,6 @@ import {
 } from '@nestjs/common';
 import { Prisma, ProductStatus } from '@prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
-import { CloudinaryService } from '../cloudinary/cloudinary.service';
 import {
   CreateProductDto,
   UpdateProductDto,
@@ -17,10 +16,7 @@ import {
  */
 @Injectable()
 export class ProductService {
-  constructor(
-    private readonly prisma: PrismaService,
-    private readonly cloudinary: CloudinaryService,
-  ) {}
+  constructor(private readonly prisma: PrismaService) {}
 
   /**
    * Tạo sản phẩm mới
@@ -33,7 +29,7 @@ export class ProductService {
       throw new ConflictException('Slug sản phẩm đã tồn tại');
     }
     return this.prisma.product.create({
-      data: { ...dto, specs: [] },
+      data: { ...dto, specs: [], images: dto.images ?? [] },
       include: { category: true },
     });
   }
@@ -136,37 +132,6 @@ export class ProductService {
   async remove(id: string) {
     await this.findOne(id);
     return this.prisma.product.delete({ where: { id } });
-  }
-
-  /**
-   * Upload ảnh sản phẩm và thêm vào danh sách images
-   */
-  async uploadImages(id: string, files: Express.Multer.File[]) {
-    const product = await this.findOne(id);
-    const urls = await this.cloudinary.uploadImages(files);
-    const updatedImages = [...(product.images as string[]), ...urls];
-    return this.prisma.product.update({
-      where: { id },
-      data: { images: updatedImages },
-      include: { category: true },
-    });
-  }
-
-  /**
-   * Xóa một ảnh khỏi sản phẩm
-   */
-  async removeImage(id: string, imageUrl: string) {
-    const product = await this.findOne(id);
-    const publicId = this.cloudinary.extractPublicId(imageUrl);
-    await this.cloudinary.deleteImage(publicId);
-    const updatedImages = (product.images as string[]).filter(
-      (img) => img !== imageUrl,
-    );
-    return this.prisma.product.update({
-      where: { id },
-      data: { images: updatedImages },
-      include: { category: true },
-    });
   }
 
   /**

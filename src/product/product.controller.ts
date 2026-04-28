@@ -8,16 +8,12 @@ import {
   Delete,
   UseGuards,
   Query,
-  UseInterceptors,
-  UploadedFiles,
 } from '@nestjs/common';
-import { FilesInterceptor } from '@nestjs/platform-express';
 import {
   ApiTags,
   ApiOperation,
   ApiResponse,
   ApiBearerAuth,
-  ApiConsumes,
 } from '@nestjs/swagger';
 import { ProductService } from './product.service';
 import {
@@ -90,28 +86,5 @@ export class ProductController {
   @ApiOperation({ summary: 'Xóa sản phẩm' })
   remove(@Param('id') id: string) {
     return this.productService.remove(id);
-  }
-
-  @Post(':id/images')
-  @ApiBearerAuth()
-  @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles('ADMIN')
-  @ApiOperation({ summary: 'Upload ảnh sản phẩm lên Cloudinary' })
-  @ApiConsumes('multipart/form-data')
-  @UseInterceptors(FilesInterceptor('images', 10, { storage: undefined }))
-  uploadImages(
-    @Param('id') id: string,
-    @UploadedFiles() files: Express.Multer.File[],
-  ) {
-    return this.productService.uploadImages(id, files);
-  }
-
-  @Delete(':id/images')
-  @ApiBearerAuth()
-  @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles('ADMIN')
-  @ApiOperation({ summary: 'Xóa một ảnh khỏi sản phẩm' })
-  removeImage(@Param('id') id: string, @Body('imageUrl') imageUrl: string) {
-    return this.productService.removeImage(id, imageUrl);
   }
 }

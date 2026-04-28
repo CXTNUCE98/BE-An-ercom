@@ -91,6 +91,12 @@ export class CreateProductDto {
   @IsString()
   readonly videoPoster?: string;
 
+  @ApiPropertyOptional({ type: [String], description: 'Mảng URL ảnh sản phẩm' })
+  @IsOptional()
+  @IsArray()
+  @IsString({ each: true })
+  readonly images?: string[];
+
   @ApiPropertyOptional()
   @IsOptional()
   @IsString()
