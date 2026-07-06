@@ -100,6 +100,11 @@ model Product {
   orderItems   OrderItem[]
   reviews      Review[]
 
+  @@index([status])
+  @@index([categoryId])
+  @@index([brand])
+  @@index([price])
+  @@index([createdAt])
   @@map("products")
 }
 
@@ -120,6 +125,9 @@ model Order {
   user            User          @relation(fields: [userId], references: [id])
   items           OrderItem[]
 
+  @@index([userId])
+  @@index([status])
+  @@index([createdAt])
   @@map("orders")
 }
 
@@ -133,6 +141,8 @@ model OrderItem {
   order     Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
   product   Product @relation(fields: [productId], references: [id])
 
+  @@index([orderId])
+  @@index([productId])
   @@map("order_items")
 }
 

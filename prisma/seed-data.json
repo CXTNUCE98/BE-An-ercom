@@ -1,0 +1,2183 @@
+{
+  "categories": [
+    {
+      "slug": "watches",
+      "name": "Watches",
+      "description": "Đồng hồ cơ chính hãng — từ Seiko Presage tới Mont Blanc Heritage. Chứng nhận, bảo hành quốc tế, vận chuyển an toàn.",
+      "image": "https://i.pinimg.com/1200x/fd/98/a9/fd98a910b898a293b1c481e806387a7b.jpg"
+    },
+    {
+      "slug": "zippo",
+      "name": "Zippo",
+      "description": "Zippo USA chính hãng, khắc tên miễn phí. Từ classic brushed tới phiên bản giới hạn — món quà đàn ông không thể bỏ qua.",
+      "image": "https://i.pinimg.com/736x/88/d5/93/88d5935ecd8a7397e6a74dc9db7f2c27.jpg"
+    },
+    {
+      "slug": "glasses",
+      "name": "Glasses",
+      "description": "Kính mát phân cực, gọng titan nhẹ, khung acetate Ý. Ray-Ban, Persol, Hugo Boss — chính hãng từng chiếc.",
+      "image": "https://i.pinimg.com/webp80/1200x/b5/77/0c/b5770c59a302364f9906369fc0e36cd8.webp"
+    },
+    {
+      "slug": "belts",
+      "name": "Belts",
+      "description": "Thắt lưng da bò full-grain Italy, khoá liền nguyên khối, đường may chỉ sáp. Khắc tên — đóng hộp gỗ.",
+      "image": "https://i.pinimg.com/736x/aa/49/c0/aa49c0560aab4b880aff6ff5203e3932.jpg"
+    },
+    {
+      "slug": "wallets",
+      "name": "Wallets",
+      "description": "Ví bifold, ví dài, ví card — da bê Ý, da Saffiano, da kỳ đà. Mềm mịn, lên màu đẹp theo thời gian.",
+      "image": "https://i.pinimg.com/1200x/55/c4/09/55c4095442731e334b8aab3b3d82e1e2.jpg"
+    },
+    {
+      "slug": "hats",
+      "name": "Hats",
+      "description": "Fedora, Flat cap, Beret, Panama — len lông cừu, da nappa, cói bện thủ công. Đậm chất quý ông cổ điển.",
+      "image": "https://i.pinimg.com/1200x/9f/b1/3e/9fb13eb554d9d673e40b8090e5a77623.jpg"
+    }
+  ],
+  "products": [
+    {
+      "slug": "seiko-5-xanh-la",
+      "name": "Seiko 5 Xanh Lá",
+      "brand": "Seiko",
+      "categorySlug": "watches",
+      "price": 300000,
+      "salePrice": 155000,
+      "description": "Đồng hồ Seiko 5 mặt số xanh lá tươi, dây kim loại bạc, bộ máy automatic.",
+      "images": [
+        "/watch/senko-green-1.jpg",
+        "/watch/senko-green-2.jpg",
+        "/watch/senko-green-3.jpg",
+        "/watch/senko-green-4.jpg",
+        "/watch/senko-green-5.jpg"
+      ],
+      "specs": [
+        {
+          "label": "Bộ máy",
+          "value": "Automatic"
+        },
+        {
+          "label": "Chống nước",
+          "value": "3ATM"
+        },
+        {
+          "label": "Đường kính",
+          "value": "40mm"
+        },
+        {
+          "label": "Dây",
+          "value": "Kim loại"
+        }
+      ],
+      "tags": [
+        "seiko",
+        "automatic",
+        "xanh-la"
+      ],
+      "highlights": [],
+      "rating": 4.5,
+      "reviewCount": 50,
+      "stock": 20,
+      "isNew": false,
+      "isBestSeller": false,
+      "isLuxury": false,
+      "videoUrl": null,
+      "videoPoster": null
+    },
+    {
+      "slug": "thuy-quan-luc-chien-do",
+      "name": "Thủy Quân Lục Chiến Đỏ",
+      "brand": "Marine",
+      "categorySlug": "watches",
+      "price": 300000,
+      "salePrice": 155000,
+      "description": "Đồng hồ phong cách quân đội, mặt số đỏ nổi bật, dây vải dù chắc chắn.",
+      "images": [
+        "/watch/marine-corps-1.jpg",
+        "/watch/marine-corps-2.jpg",
+        "/watch/marine-corps-3.jpg",
+        "/watch/marine-corps-4.jpg",
+        "/watch/marine-corps-5.jpg"
+      ],
+      "specs": [
+        {
+          "label": "Bộ máy",
+          "value": "Quartz"
+        },
+        {
+          "label": "Chống nước",
+          "value": "3ATM"
+        },
+        {
+          "label": "Đường kính",
+          "value": "42mm"
+        },
+        {
+          "label": "Dây",
+          "value": "Vải dù"
+        }
+      ],
+      "tags": [
+        "military",
+        "do",
+        "sporty"
+      ],
+      "highlights": [],
+      "rating": 4.4,
+      "reviewCount": 40,
+      "stock": 25,
+      "isNew": false,
+      "isBestSeller": false,
+      "isLuxury": false,
+      "videoUrl": null,
+      "videoPoster": null
+    },
+    {
+      "slug": "omega-kham-trai",
+      "name": "Omega Khảm Trai",
+      "brand": "Omega",
+      "categorySlug": "watches",
+      "price": 300000,
+      "salePrice": 155000,
+      "description": "Mặt số khảm trai óng ánh tự nhiên, gọng vàng sang trọng, kiểu Omega cổ điển.",
+      "images": [
+        "/watch/omg-white-1.jpg",
+        "/watch/omg-white-2.jpg",
+        "/watch/omg-white-3.jpg",
+        "/watch/omg-white-4.jpg"
+      ],
+      "specs": [
+        {
+          "label": "Bộ máy",
+          "value": "Automatic"
+        },
+        {
+          "label": "Chống nước",
+          "value": "3ATM"
+        },
+        {
+          "label": "Đường kính",
+          "value": "40mm"
+        },
+        {
+          "label": "Mặt",
+          "value": "Khảm trai"
+        }
+      ],
+      "tags": [
+        "omega",
+        "kham-trai",
+        "sang-trong"
+      ],
+      "highlights": [],
+      "rating": 4.6,
+      "reviewCount": 55,
+      "stock": 18,
+      "isNew": false,
+      "isBestSeller": false,
+      "isLuxury": false,
+      "videoUrl": null,
+      "videoPoster": null
+    },
+    {
+      "slug": "omega-lua-trang",
+      "name": "Omega Lụa Trắng",
+      "brand": "Omega",
+      "categorySlug": "watches",
+      "price": 300000,
+      "salePrice": 152000,
+      "description": "Đồng hồ Omega mặt trắng lụa thanh lịch, dây da mềm, phù hợp công sở.",
+      "images": [
+        "/watch/omg-luatrang-1.jpg",
+        "/watch/omg-luatrang-2.jpg",
+        "/watch/omg-luatrang-3.jpg",
+        "/watch/omg-luatrang-4.jpg"
+      ],
+      "specs": [
+        {
+          "label": "Bộ máy",
+          "value": "Automatic"
+        },
+        {
+          "label": "Chống nước",
+          "value": "3ATM"
+        },
+        {
+          "label": "Đường kính",
+          "value": "40mm"
+        },
+        {
+          "label": "Dây",
+          "value": "Da"
+        }
+      ],
+      "tags": [
+        "omega",
+        "trang",
+        "thanh-lich"
+      ],
+      "highlights": [],
+      "rating": 4.5,
+      "reviewCount": 48,
+      "stock": 22,
+      "isNew": false,
+      "isBestSeller": false,
+      "isLuxury": false,
+      "videoUrl": null,
+      "videoPoster": null
+    },
+    {
+      "slug": "patek-lua-vang",
+      "name": "Patek Lụa Vàng",
+      "brand": "Patek Philippe",
+      "categorySlug": "watches",
+      "price": 300000,
+      "salePrice": 152000,
+      "description": "Phong cách Patek mặt vàng lụa quý phái, vỏ mạ gold, dây da nâu lịch lãm.",
+      "images": [
+        "/watch/patex-luavang-1.jpg",
+        "/watch/patex-luavang-2.jpg",
+        "/watch/patex-luavang-3.jpg",
+        "/watch/patex-luavang-4.jpg"
+      ],
+      "specs": [
+        {
+          "label": "Bộ máy",
+          "value": "Automatic"
+        },
+        {
+          "label": "Chống nước",
+          "value": "3ATM"
+        },
+        {
+          "label": "Đường kính",
+          "value": "40mm"
+        },
+        {
+          "label": "Dây",
+          "value": "Da nâu"
+        }
+      ],
+      "tags": [
+        "patek",
+        "vang",
+        "luxury"
+      ],
+      "highlights": [],
+      "rating": 4.7,
+      "reviewCount": 62,
+      "stock": 15,
+      "isNew": false,
+      "isBestSeller": false,
+      "isLuxury": true,
+      "videoUrl": null,
+      "videoPoster": null
+    },
+    {
+      "slug": "orient-chem-canh-do-day-trang",
+      "name": "Orient Chém Cạnh Đỏ Dây Trắng",
+      "brand": "Orient",
+      "categorySlug": "watches",
+      "price": 300000,
+      "salePrice": 155000,
+      "description": "Orient mặt đỏ chém cạnh sắc nét, dây thép sơn trắng, cá tính trẻ trung.",
+      "images": [
+        "/watch/oren-1.PNG",
+        "/watch/oren-2.PNG",
+        "/watch/oren-3.PNG",
+        "/watch/oren-4.PNG"
+      ],
+      "specs": [
+        {
+          "label": "Bộ máy",
+          "value": "Automatic"
+        },
+        {
+          "label": "Chống nước",
+          "value": "3ATM"
+        },
+        {
+          "label": "Đường kính",
+          "value": "41mm"
+        },
+        {
+          "label": "Dây",
+          "value": "Thép sơn trắng"
+        }
+      ],
+      "tags": [
+        "orient",
+        "do",
+        "chem-canh"
+      ],
+      "highlights": [],
+      "rating": 4.4,
+      "reviewCount": 38,
+      "stock": 20,
+      "isNew": false,
+      "isBestSeller": false,
+      "isLuxury": false,
+      "videoUrl": null,
+      "videoPoster": null
+    },
+    {
+      "slug": "rolex-do",
+      "name": "Rolex Đỏ",
+      "brand": "Rolex",
+      "categorySlug": "watches",
+      "price": 280000,
+      "salePrice": 145000,
+      "description": "Phong cách Rolex Submariner mặt đỏ rực, dây kim loại đặc, bộ máy automatic.",
+      "images": [
+        "https://i.pinimg.com/736x/7e/f0/43/7ef043e51ced476d5a8d7d09b320fe75.jpg",
+        "https://i.pinimg.com/736x/81/6c/6e/816c6e12077d63eceb0734466c4c32ee.jpg",
+        "https://i.pinimg.com/1200x/46/ac/7d/46ac7d3bfb14df3c284aafe22dddeb78.jpg"
+      ],
+      "specs": [
+        {
+          "label": "Bộ máy",
+          "value": "Automatic"
+        },
+        {
+          "label": "Chống nước",
+          "value": "5ATM"
+        },
+        {
+          "label": "Đường kính",
+          "value": "41mm"
+        },
+        {
+          "label": "Dây",
+          "value": "Kim loại"
+        }
+      ],
+      "tags": [
+        "rolex",
+        "do",
+        "luxury"
+      ],
+      "highlights": [],
+      "rating": 4.8,
+      "reviewCount": 80,
+      "stock": 12,
+      "isNew": false,
+      "isBestSeller": true,
+      "isLuxury": true,
+      "videoUrl": null,
+      "videoPoster": null
+    },
+    {
+      "slug": "orient-vuong-vang",
+      "name": "Orient Vuông Vàng",
+      "brand": "Orient",
+      "categorySlug": "watches",
+      "price": 300000,
+      "salePrice": 155000,
+      "description": "Orient mặt vuông vàng cổ điển, kiểu dáng dress-watch tinh tế cho doanh nhân.",
+      "images": [
+        "/watch/oren-yellow-1.jpg",
+        "/watch/oren-yellow-2.jpg",
+        "/watch/oren-yellow-3.jpg",
+        "/watch/oren-yellow-4.jpg"
+      ],
+      "specs": [
+        {
+          "label": "Bộ máy",
+          "value": "Quartz"
+        },
+        {
+          "label": "Chống nước",
+          "value": "3ATM"
+        },
+        {
+          "label": "Kích thước",
+          "value": "36mm vuông"
+        },
+        {
+          "label": "Dây",
+          "value": "Kim loại mạ vàng"
+        }
+      ],
+      "tags": [
+        "orient",
+        "vuong",
+        "vang"
+      ],
+      "highlights": [],
+      "rating": 4.5,
+      "reviewCount": 42,
+      "stock": 18,
+      "isNew": false,
+      "isBestSeller": false,
+      "isLuxury": false,
+      "videoUrl": null,
+      "videoPoster": null
+    },
+    {
+      "slug": "omega-thuyen-buom-day-lua",
+      "name": "Omega Thuyền Buồm Dây Lụa",
+      "brand": "Omega",
+      "categorySlug": "watches",
+      "price": 300000,
+      "salePrice": 155000,
+      "description": "Mặt số họa tiết thuyền buồm lãng tử, dây lụa nhẹ êm tay, sang trọng khác biệt.",
+      "images": [
+        "/watch/omg-sailboat-1.jpg",
+        "/watch/omg-sailboat-2.jpg",
+        "/watch/omg-sailboat-3.jpg",
+        "/watch/omg-sailboat-4.jpg"
+      ],
+      "specs": [
+        {
+          "label": "Bộ máy",
+          "value": "Automatic"
+        },
+        {
+          "label": "Chống nước",
+          "value": "3ATM"
+        },
+        {
+          "label": "Đường kính",
+          "value": "40mm"
+        },
+        {
+          "label": "Dây",
+          "value": "Lụa"
+        }
+      ],
+      "tags": [
+        "omega",
+        "thuyen-buom",
+        "day-lua"
+      ],
+      "highlights": [],
+      "rating": 4.6,
+      "reviewCount": 47,
+      "stock": 16,
+      "isNew": false,
+      "isBestSeller": false,
+      "isLuxury": false,
+      "videoUrl": null,
+      "videoPoster": null
+    },
+    {
+      "slug": "orient-3-sao-do-xanh-la",
+      "name": "Orient 3 Sao Đỏ + Xanh Lá",
+      "brand": "Orient",
+      "categorySlug": "watches",
+      "price": 300000,
+      "salePrice": 152000,
+      "description": "Orient 3 sao mặt số kết hợp đỏ và xanh lá tương phản mạnh, phong cách thể thao.",
+      "images": [
+        "/watch/orient-3-star-1.jpg",
+        "/watch/orient-3-star-2.jpg",
+        "/watch/orient-3-star-3.jpg",
+        "/watch/orient-3-star-4.jpg",
+        "/watch/orient-3-star-5.jpg"
+      ],
+      "specs": [
+        {
+          "label": "Bộ máy",
+          "value": "Automatic"
+        },
+        {
+          "label": "Chống nước",
+          "value": "3ATM"
+        },
+        {
+          "label": "Đường kính",
+          "value": "41mm"
+        },
+        {
+          "label": "Dây",
+          "value": "Kim loại"
+        }
+      ],
+      "tags": [
+        "orient",
+        "3-sao",
+        "sporty"
+      ],
+      "highlights": [],
+      "rating": 4.4,
+      "reviewCount": 36,
+      "stock": 22,
+      "isNew": false,
+      "isBestSeller": false,
+      "isLuxury": false,
+      "videoUrl": null,
+      "videoPoster": null
+    },
+    {
+      "slug": "rado-vang-dam",
+      "name": "Rado Vàng Đậm",
+      "brand": "Rado",
+      "categorySlug": "watches",
+      "price": 285000,
+      "salePrice": 150000,
+      "description": "Rado vỏ và mặt số vàng đậm, vẻ sang quý cổ điển, dây kim loại mạ vàng.",
+      "images": [
+        "/watch/rado-bold-1.jpg",
+        "/watch/rado-bold-2.jpg",
+        "/watch/rado-bold-3.jpg",
+        "/watch/rado-bold-4.jpg"
+      ],
+      "specs": [
+        {
+          "label": "Bộ máy",
+          "value": "Quartz"
+        },
+        {
+          "label": "Chống nước",
+          "value": "3ATM"
+        },
+        {
+          "label": "Đường kính",
+          "value": "39mm"
+        },
+        {
+          "label": "Dây",
+          "value": "Kim loại mạ vàng"
+        }
+      ],
+      "tags": [
+        "rado",
+        "vang",
+        "classic"
+      ],
+      "highlights": [],
+      "rating": 4.5,
+      "reviewCount": 44,
+      "stock": 18,
+      "isNew": false,
+      "isBestSeller": false,
+      "isLuxury": false,
+      "videoUrl": null,
+      "videoPoster": null
+    },
+    {
+      "slug": "seiko-nau",
+      "name": "Seiko Nâu",
+      "brand": "Seiko",
+      "categorySlug": "watches",
+      "price": 300000,
+      "salePrice": 155000,
+      "description": "Seiko mặt nâu trầm ấm, dây da bò nâu cùng tông, lựa chọn an toàn cho mọi outfit.",
+      "images": [
+        "/watch/senko-brown-1.jpg",
+        "/watch/senko-brown-2.PNG",
+        "/watch/senko-brown-3.PNG",
+        "/watch/senko-brown-4.PNG"
+      ],
+      "specs": [
+        {
+          "label": "Bộ máy",
+          "value": "Automatic"
+        },
+        {
+          "label": "Chống nước",
+          "value": "3ATM"
+        },
+        {
+          "label": "Đường kính",
+          "value": "40mm"
+        },
+        {
+          "label": "Dây",
+          "value": "Da nâu"
+        }
+      ],
+      "tags": [
+        "seiko",
+        "nau",
+        "daily"
+      ],
+      "highlights": [],
+      "rating": 4.5,
+      "reviewCount": 52,
+      "stock": 24,
+      "isNew": false,
+      "isBestSeller": false,
+      "isLuxury": false,
+      "videoUrl": null,
+      "videoPoster": null
+    },
+    {
+      "slug": "sk-mat-lua",
+      "name": "SK Mặt Lửa",
+      "brand": "SK",
+      "categorySlug": "watches",
+      "price": 280000,
+      "salePrice": 147000,
+      "description": "SK mặt số hiệu ứng lửa cam–đỏ độc đáo, vỏ thép đen, phong cách trẻ trung mạnh mẽ.",
+      "images": [
+        "/watch/sk-fire-1.jpg",
+        "/watch/sk-fire-2.jpg",
+        "/watch/sk-fire-3.jpg"
+      ],
+      "specs": [
+        {
+          "label": "Bộ máy",
+          "value": "Quartz"
+        },
+        {
+          "label": "Chống nước",
+          "value": "3ATM"
+        },
+        {
+          "label": "Đường kính",
+          "value": "42mm"
+        },
+        {
+          "label": "Dây",
+          "value": "Thép đen"
+        }
+      ],
+      "tags": [
+        "sk",
+        "mat-lua",
+        "sporty"
+      ],
+      "highlights": [],
+      "rating": 4.3,
+      "reviewCount": 30,
+      "stock": 25,
+      "isNew": true,
+      "isBestSeller": false,
+      "isLuxury": false,
+      "videoUrl": null,
+      "videoPoster": null
+    },
+    {
+      "slug": "orient-chem-canh-full-vang",
+      "name": "Orient Chém Cạnh Full Vàng",
+      "brand": "Orient",
+      "categorySlug": "watches",
+      "price": 300000,
+      "salePrice": 155000,
+      "description": "Orient chém cạnh full vàng, dây và mặt đồng bộ, lựa chọn nổi bật cho buổi tiệc.",
+      "images": [
+        "/watch/oren-full-yellow-1.PNG",
+        "/watch/oren-full-yellow-2.PNG",
+        "/watch/oren-full-yellow-3.PNG",
+        "/watch/oren-full-yellow-4.PNG"
+      ],
+      "specs": [
+        {
+          "label": "Bộ máy",
+          "value": "Automatic"
+        },
+        {
+          "label": "Chống nước",
+          "value": "3ATM"
+        },
+        {
+          "label": "Đường kính",
+          "value": "41mm"
+        },
+        {
+          "label": "Dây",
+          "value": "Kim loại mạ vàng"
+        }
+      ],
+      "tags": [
+        "orient",
+        "vang",
+        "chem-canh"
+      ],
+      "highlights": [],
+      "rating": 4.5,
+      "reviewCount": 41,
+      "stock": 16,
+      "isNew": false,
+      "isBestSeller": false,
+      "isLuxury": false,
+      "videoUrl": null,
+      "videoPoster": null
+    },
+    {
+      "slug": "orient-chem-canh-mat-do-day-vang",
+      "name": "Orient Chém Cạnh Mặt Đỏ Dây Vàng",
+      "brand": "Orient",
+      "categorySlug": "watches",
+      "price": 300000,
+      "salePrice": 155000,
+      "description": "Orient chém cạnh tương phản: mặt đỏ rực trên dây vàng bóng, cá tính ấn tượng.",
+      "images": [
+        "/watch/oren-cc-red-1.jpg",
+        "/watch/oren-cc-red-2.jpg",
+        "/watch/oren-cc-red-3.jpg"
+      ],
+      "specs": [
+        {
+          "label": "Bộ máy",
+          "value": "Automatic"
+        },
+        {
+          "label": "Chống nước",
+          "value": "3ATM"
+        },
+        {
+          "label": "Đường kính",
+          "value": "41mm"
+        },
+        {
+          "label": "Dây",
+          "value": "Kim loại mạ vàng"
+        }
+      ],
+      "tags": [
+        "orient",
+        "do",
+        "vang"
+      ],
+      "highlights": [],
+      "rating": 4.5,
+      "reviewCount": 39,
+      "stock": 18,
+      "isNew": false,
+      "isBestSeller": false,
+      "isLuxury": false,
+      "videoUrl": null,
+      "videoPoster": null
+    },
+    {
+      "slug": "omega-rang-ca-map",
+      "name": "Omega Răng Cá Mập",
+      "brand": "Omega",
+      "categorySlug": "watches",
+      "price": 300000,
+      "salePrice": 155000,
+      "description": "Omega kiểu dáng đặc biệt với viền bezel răng cá mập sắc nét, mạnh mẽ và độc đáo.",
+      "images": [
+        "/watch/omg-shark-1.jpg",
+        "/watch/omg-shark-2.jpg",
+        "/watch/omg-shark-3.jpg",
+        "/watch/omg-shark-4.jpg"
+      ],
+      "specs": [
+        {
+          "label": "Bộ máy",
+          "value": "Automatic"
+        },
+        {
+          "label": "Chống nước",
+          "value": "5ATM"
+        },
+        {
+          "label": "Đường kính",
+          "value": "42mm"
+        },
+        {
+          "label": "Dây",
+          "value": "Kim loại"
+        }
+      ],
+      "tags": [
+        "omega",
+        "rang-ca-map",
+        "doc-dao"
+      ],
+      "highlights": [],
+      "rating": 4.7,
+      "reviewCount": 58,
+      "stock": 14,
+      "isNew": false,
+      "isBestSeller": true,
+      "isLuxury": false,
+      "videoUrl": null,
+      "videoPoster": null
+    },
+    {
+      "slug": "seiko-5-mat-do-day-vang",
+      "name": "Seiko 5 Mặt Đỏ Dây Vàng",
+      "brand": "Seiko",
+      "categorySlug": "watches",
+      "price": 300000,
+      "salePrice": 155000,
+      "description": "Seiko 5 mặt đỏ rực kết hợp dây kim loại mạ vàng, dòng cổ điển luôn được ưa chuộng.",
+      "images": [
+        "/watch/senko-red-yellow-1.jpg",
+        "/watch/senko-red-yellow-2.jpg"
+      ],
+      "specs": [
+        {
+          "label": "Bộ máy",
+          "value": "Automatic"
+        },
+        {
+          "label": "Chống nước",
+          "value": "3ATM"
+        },
+        {
+          "label": "Đường kính",
+          "value": "40mm"
+        },
+        {
+          "label": "Dây",
+          "value": "Kim loại mạ vàng"
+        }
+      ],
+      "tags": [
+        "seiko",
+        "do",
+        "vang"
+      ],
+      "highlights": [],
+      "rating": 4.6,
+      "reviewCount": 49,
+      "stock": 20,
+      "isNew": true,
+      "isBestSeller": false,
+      "isLuxury": false,
+      "videoUrl": null,
+      "videoPoster": null
+    },
+    {
+      "slug": "zippo-black-ice",
+      "name": "Zippo Black Ice 150",
+      "brand": "Zippo",
+      "categorySlug": "zippo",
+      "price": 650000,
+      "salePrice": null,
+      "description": "Lớp phủ Black Ice phản chiếu bóng loáng như gương đen. Khắc tên laser miễn phí.",
+      "images": [
+        "https://i.pinimg.com/1200x/72/b8/f7/72b8f76799dc6e82f50b09aa91e69cdf.jpg"
+      ],
+      "specs": [
+        {
+          "label": "Chất liệu",
+          "value": "Đồng thau mạ PVD"
+        },
+        {
+          "label": "Kích thước",
+          "value": "56×36×12mm"
+        },
+        {
+          "label": "Xuất xứ",
+          "value": "Bradford, PA, USA"
+        },
+        {
+          "label": "Bảo hành",
+          "value": "Trọn đời"
+        }
+      ],
+      "tags": [
+        "classic",
+        "black"
+      ],
+      "highlights": [],
+      "rating": 4.7,
+      "reviewCount": 312,
+      "stock": 45,
+      "isNew": false,
+      "isBestSeller": true,
+      "isLuxury": false,
+      "videoUrl": null,
+      "videoPoster": null
+    },
+    {
+      "slug": "zippo-armor-deep-carve",
+      "name": "Zippo Armor Deep Carve",
+      "brand": "Zippo",
+      "categorySlug": "zippo",
+      "price": 1350000,
+      "salePrice": null,
+      "description": "Vỏ Armor dày 1.5x, khắc chìm 360° hoa văn Celtic. Mạ antique brass.",
+      "images": [
+        "https://i.pinimg.com/736x/0f/49/d2/0f49d26cfb9f2240619adb8814872fca.jpg"
+      ],
+      "specs": [
+        {
+          "label": "Chất liệu",
+          "value": "Đồng Armor 1.5x"
+        },
+        {
+          "label": "Kỹ thuật",
+          "value": "Deep carve 360°"
+        },
+        {
+          "label": "Xuất xứ",
+          "value": "USA"
+        },
+        {
+          "label": "Bảo hành",
+          "value": "Trọn đời"
+        }
+      ],
+      "tags": [
+        "armor",
+        "limited"
+      ],
+      "highlights": [],
+      "rating": 4.9,
+      "reviewCount": 56,
+      "stock": 8,
+      "isNew": false,
+      "isBestSeller": false,
+      "isLuxury": true,
+      "videoUrl": null,
+      "videoPoster": null
+    },
+    {
+      "slug": "zippo-venetian-brass",
+      "name": "Zippo Venetian High Polish Brass",
+      "brand": "Zippo",
+      "categorySlug": "zippo",
+      "price": 780000,
+      "salePrice": null,
+      "description": "Họa tiết Venetian cổ điển khắc hai mặt, đồng thau bóng cao. Biểu tượng Zippo vượt thời gian.",
+      "images": [
+        "https://i.pinimg.com/webp80/736x/8c/0f/92/8c0f92c1ff7913f0899678c2d212fe17.webp"
+      ],
+      "specs": [
+        {
+          "label": "Chất liệu",
+          "value": "Đồng thau bóng"
+        },
+        {
+          "label": "Họa tiết",
+          "value": "Venetian hai mặt"
+        },
+        {
+          "label": "Xuất xứ",
+          "value": "USA"
+        },
+        {
+          "label": "Bảo hành",
+          "value": "Trọn đời"
+        }
+      ],
+      "tags": [
+        "vintage",
+        "brass"
+      ],
+      "highlights": [],
+      "rating": 4.6,
+      "reviewCount": 98,
+      "stock": 25,
+      "isNew": false,
+      "isBestSeller": false,
+      "isLuxury": false,
+      "videoUrl": null,
+      "videoPoster": null
+    },
+    {
+      "slug": "zippo-matte-navy",
+      "name": "Zippo Navy Matte 239",
+      "brand": "Zippo",
+      "categorySlug": "zippo",
+      "price": 550000,
+      "salePrice": null,
+      "description": "Bề mặt sơn matte xanh navy trầm lắng. Mặc định cho gentleman — không phô trương, đủ tinh tế.",
+      "images": [
+        "https://i.pinimg.com/736x/ba/60/3f/ba603fc7eeb31b65c935eb6b35cc6e19.jpg"
+      ],
+      "specs": [
+        {
+          "label": "Chất liệu",
+          "value": "Thép sơn matte"
+        },
+        {
+          "label": "Màu",
+          "value": "Navy #239"
+        },
+        {
+          "label": "Xuất xứ",
+          "value": "USA"
+        },
+        {
+          "label": "Bảo hành",
+          "value": "Trọn đời"
+        }
+      ],
+      "tags": [
+        "matte",
+        "everyday"
+      ],
+      "highlights": [],
+      "rating": 4.3,
+      "reviewCount": 145,
+      "stock": 60,
+      "isNew": true,
+      "isBestSeller": false,
+      "isLuxury": false,
+      "videoUrl": null,
+      "videoPoster": null
+    },
+    {
+      "slug": "zippo-replica-1941",
+      "name": "Zippo 1941 Replica Brushed Chrome",
+      "brand": "Zippo",
+      "categorySlug": "zippo",
+      "price": 890000,
+      "salePrice": null,
+      "description": "Phiên bản tái hiện mẫu 1941 — góc bo tròn, bản lề 4 trục, vỏ thép chrome brushed.",
+      "images": [
+        "https://i.pinimg.com/736x/34/33/39/343339fcf3e40d20097689d1d81281bb.jpg"
+      ],
+      "specs": [
+        {
+          "label": "Chất liệu",
+          "value": "Thép chrome"
+        },
+        {
+          "label": "Dòng",
+          "value": "1941 Replica"
+        },
+        {
+          "label": "Xuất xứ",
+          "value": "USA"
+        },
+        {
+          "label": "Bảo hành",
+          "value": "Trọn đời"
+        }
+      ],
+      "tags": [
+        "replica",
+        "heritage"
+      ],
+      "highlights": [],
+      "rating": 4.8,
+      "reviewCount": 76,
+      "stock": 14,
+      "isNew": false,
+      "isBestSeller": false,
+      "isLuxury": true,
+      "videoUrl": null,
+      "videoPoster": null
+    },
+    {
+      "slug": "zippo-jack-daniels",
+      "name": "Zippo Jack Daniel's Old No. 7",
+      "brand": "Zippo",
+      "categorySlug": "zippo",
+      "price": 950000,
+      "salePrice": null,
+      "description": "Phiên bản hợp tác Jack Daniel's, khắc logo nổi trên nền thép đen matte.",
+      "images": [
+        "https://i.pinimg.com/736x/3d/ea/57/3dea57bf61d87893f4cca0aa535faf34.jpg"
+      ],
+      "specs": [
+        {
+          "label": "Chất liệu",
+          "value": "Thép đen matte"
+        },
+        {
+          "label": "Phiên bản",
+          "value": "Jack Daniel's collab"
+        },
+        {
+          "label": "Xuất xứ",
+          "value": "USA"
+        },
+        {
+          "label": "Bảo hành",
+          "value": "Trọn đời"
+        }
+      ],
+      "tags": [
+        "collab",
+        "limited"
+      ],
+      "highlights": [],
+      "rating": 4.7,
+      "reviewCount": 42,
+      "stock": 10,
+      "isNew": false,
+      "isBestSeller": true,
+      "isLuxury": false,
+      "videoUrl": null,
+      "videoPoster": null
+    },
+    {
+      "slug": "rayban-aviator-classic",
+      "name": "Ray-Ban Aviator Classic RB3025",
+      "brand": "Ray-Ban",
+      "categorySlug": "glasses",
+      "price": 2200000,
+      "salePrice": null,
+      "description": "Biểu tượng phi công từ 1937. Gọng vàng, tròng G-15 xanh lá. UV400, phân cực.",
+      "images": [
+        "https://images.unsplash.com/photo-1572635196237-14b3f281503f?auto=format&fit=crop&w=800&q=80",
+        "https://i.pinimg.com/1200x/cc/75/02/cc7502b3fd26e0327fa183e6ec0f134d.jpg",
+        "https://i.pinimg.com/1200x/20/ab/6c/20ab6c347889889d2a955cba0c087b80.jpg"
+      ],
+      "specs": [
+        {
+          "label": "Gọng",
+          "value": "Kim loại vàng"
+        },
+        {
+          "label": "Tròng",
+          "value": "G-15 phân cực"
+        },
+        {
+          "label": "Chống",
+          "value": "UV400"
+        },
+        {
+          "label": "Kích cỡ",
+          "value": "58mm"
+        }
+      ],
+      "tags": [
+        "aviator",
+        "iconic"
+      ],
+      "highlights": [],
+      "rating": 4.8,
+      "reviewCount": 287,
+      "stock": 35,
+      "isNew": false,
+      "isBestSeller": true,
+      "isLuxury": false,
+      "videoUrl": null,
+      "videoPoster": null
+    },
+    {
+      "slug": "persol-po0649",
+      "name": "Persol PO0649 Steve McQueen",
+      "brand": "Persol",
+      "categorySlug": "glasses",
+      "price": 4800000,
+      "salePrice": null,
+      "description": "Thiết kế Italy, bản lề Meflecto linh hoạt, acetate tortoise shell, tròng crystal green.",
+      "images": [
+        "https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=800&q=80",
+        "https://i.pinimg.com/1200x/68/b4/7a/68b47a8144ca65e8eb4e554a5e41026e.jpg",
+        "https://i.pinimg.com/1200x/d4/51/7e/d4517e8dc70a8b803da1e1b8e28f12a5.jpg"
+      ],
+      "specs": [
+        {
+          "label": "Gọng",
+          "value": "Acetate Havana"
+        },
+        {
+          "label": "Bản lề",
+          "value": "Meflecto"
+        },
+        {
+          "label": "Tròng",
+          "value": "Crystal green"
+        },
+        {
+          "label": "Xuất xứ",
+          "value": "Italy"
+        }
+      ],
+      "tags": [
+        "luxury",
+        "italian"
+      ],
+      "highlights": [],
+      "rating": 4.9,
+      "reviewCount": 63,
+      "stock": 7,
+      "isNew": false,
+      "isBestSeller": false,
+      "isLuxury": true,
+      "videoUrl": null,
+      "videoPoster": null
+    },
+    {
+      "slug": "hugo-boss-1199s",
+      "name": "Hugo Boss 1199/S",
+      "brand": "Hugo Boss",
+      "categorySlug": "glasses",
+      "price": 3100000,
+      "salePrice": null,
+      "description": "Gọng titanium siêu nhẹ, mặt vuông nam tính, tròng gradient smoke. Phong cách doanh nhân.",
+      "images": [
+        "https://i.pinimg.com/1200x/1f/51/33/1f5133f2f887984e8569c45708f6c6db.jpg",
+        "https://i.pinimg.com/736x/75/e8/7a/75e87a4c4026f715317e461c2e7b0df9.jpg",
+        "https://i.pinimg.com/1200x/32/a8/69/32a86910699f5929fbc268d5c4c33076.jpg"
+      ],
+      "specs": [
+        {
+          "label": "Gọng",
+          "value": "Titanium matte"
+        },
+        {
+          "label": "Tròng",
+          "value": "Gradient smoke"
+        },
+        {
+          "label": "Trọng lượng",
+          "value": "22g"
+        },
+        {
+          "label": "Kích cỡ",
+          "value": "56mm"
+        }
+      ],
+      "tags": [
+        "business",
+        "titanium"
+      ],
+      "highlights": [],
+      "rating": 4.5,
+      "reviewCount": 41,
+      "stock": 18,
+      "isNew": true,
+      "isBestSeller": false,
+      "isLuxury": false,
+      "videoUrl": null,
+      "videoPoster": null
+    },
+    {
+      "slug": "oakley-holbrook",
+      "name": "Oakley Holbrook OO9102",
+      "brand": "Oakley",
+      "categorySlug": "glasses",
+      "price": 2800000,
+      "salePrice": null,
+      "description": "O Matter frame bền nhẹ, tròng Prizm tương phản cao. Casual, thể thao, sáng tối đều đẹp.",
+      "images": [
+        "https://i.pinimg.com/1200x/30/4c/78/304c787a905fde36e1ee072713f70cdc.jpg",
+        "https://i.pinimg.com/1200x/01/e5/07/01e507fd9f26d056545e4bb2ab0eb57b.jpg",
+        "https://i.pinimg.com/1200x/ac/27/d7/ac27d75ac1ddf5af4f4fbab7c8f0a8db.jpg"
+      ],
+      "specs": [
+        {
+          "label": "Gọng",
+          "value": "O Matter"
+        },
+        {
+          "label": "Tròng",
+          "value": "Prizm Black"
+        },
+        {
+          "label": "Chống",
+          "value": "UV400"
+        },
+        {
+          "label": "Kích cỡ",
+          "value": "55mm"
+        }
+      ],
+      "tags": [
+        "sporty",
+        "prizm"
+      ],
+      "highlights": [],
+      "rating": 4.6,
+      "reviewCount": 178,
+      "stock": 28,
+      "isNew": false,
+      "isBestSeller": false,
+      "isLuxury": false,
+      "videoUrl": null,
+      "videoPoster": null
+    },
+    {
+      "slug": "montblanc-mb0263s",
+      "name": "Mont Blanc MB0263S",
+      "brand": "Mont Blanc",
+      "categorySlug": "glasses",
+      "price": 7200000,
+      "salePrice": null,
+      "description": "Logo snowcap trên gọng vàng hồng, acetate đen bóng, tròng xám chống lóa. Đẳng cấp thượng lưu.",
+      "images": [
+        "https://i.pinimg.com/1200x/36/b9/60/36b9602d935700f007d9edb369a432c2.jpg",
+        "https://i.pinimg.com/1200x/ae/12/64/ae1264117258169e3ae3098e7b178aeb.jpg",
+        "https://i.pinimg.com/736x/f7/3a/6b/f73a6b2c5a69c11207f465306e825877.jpg"
+      ],
+      "specs": [
+        {
+          "label": "Gọng",
+          "value": "Acetate + kim loại rose gold"
+        },
+        {
+          "label": "Tròng",
+          "value": "Xám polarized"
+        },
+        {
+          "label": "Xuất xứ",
+          "value": "Italy"
+        },
+        {
+          "label": "Kích cỡ",
+          "value": "54mm"
+        }
+      ],
+      "tags": [
+        "luxury",
+        "business"
+      ],
+      "highlights": [],
+      "rating": 4.9,
+      "reviewCount": 22,
+      "stock": 4,
+      "isNew": false,
+      "isBestSeller": false,
+      "isLuxury": true,
+      "videoUrl": null,
+      "videoPoster": null
+    },
+    {
+      "slug": "rayban-wayfarer",
+      "name": "Ray-Ban Original Wayfarer RB2140",
+      "brand": "Ray-Ban",
+      "categorySlug": "glasses",
+      "price": 2500000,
+      "salePrice": null,
+      "description": "Huyền thoại từ 1956. Acetate đen, tròng G-15. Không bao giờ lỗi mốt.",
+      "images": [
+        "https://i.pinimg.com/1200x/a1/e2/11/a1e211a5bed347866caa73589549f23d.jpg",
+        "https://i.pinimg.com/1200x/9b/2d/da/9b2dda7f98a59a12aaaf305d9df01c23.jpg",
+        "https://i.pinimg.com/1200x/ca/58/1b/ca581b4654c4e080f6f6201240c9da30.jpg"
+      ],
+      "specs": [
+        {
+          "label": "Gọng",
+          "value": "Acetate đen"
+        },
+        {
+          "label": "Tròng",
+          "value": "G-15"
+        },
+        {
+          "label": "Chống",
+          "value": "UV400"
+        },
+        {
+          "label": "Kích cỡ",
+          "value": "50mm"
+        }
+      ],
+      "tags": [
+        "wayfarer",
+        "iconic"
+      ],
+      "highlights": [],
+      "rating": 4.7,
+      "reviewCount": 345,
+      "stock": 40,
+      "isNew": false,
+      "isBestSeller": false,
+      "isLuxury": false,
+      "videoUrl": null,
+      "videoPoster": null
+    },
+    {
+      "slug": "da-bo-fullgrain-italy",
+      "name": "Thắt Lưng Da Bò Full-grain Italy",
+      "brand": "IRONMAN",
+      "categorySlug": "belts",
+      "price": 480000,
+      "salePrice": null,
+      "description": "Da bò full-grain nhập Italy, khoá kim inox không rỉ, đường may chỉ sáp tay.",
+      "images": [
+        "https://i.pinimg.com/736x/17/81/0e/17810e7b4d6202513d523d16d0a914e4.jpg",
+        "https://i.pinimg.com/1200x/55/9e/2a/559e2a96af6c83a31870e790933ca8ce.jpg",
+        "https://i.pinimg.com/736x/42/1f/b7/421fb7e5841fa12d91d24fecfe2c380f.jpg"
+      ],
+      "specs": [
+        {
+          "label": "Chất liệu",
+          "value": "Da bò full-grain"
+        },
+        {
+          "label": "Khoá",
+          "value": "Inox 316L"
+        },
+        {
+          "label": "Rộng",
+          "value": "35mm"
+        },
+        {
+          "label": "Xuất xứ da",
+          "value": "Italy"
+        }
+      ],
+      "tags": [
+        "fullgrain",
+        "classic"
+      ],
+      "highlights": [],
+      "rating": 4.6,
+      "reviewCount": 201,
+      "stock": 50,
+      "isNew": false,
+      "isBestSeller": true,
+      "isLuxury": false,
+      "videoUrl": null,
+      "videoPoster": null
+    },
+    {
+      "slug": "that-lung-khoa-tu-dong",
+      "name": "Thắt Lưng Khoá Tự Động Nano",
+      "brand": "IRONMAN",
+      "categorySlug": "belts",
+      "price": 350000,
+      "salePrice": null,
+      "description": "Khoá tự động trượt êm, da bò top-grain, cắt size tại nhà dễ dàng.",
+      "images": [
+        "https://i.pinimg.com/736x/ca/d6/c1/cad6c192c03de133cd3b6db5ed7e0209.jpg",
+        "https://i.pinimg.com/1200x/3d/27/e6/3d27e66ae1db922c2969195aae6d0de0.jpg",
+        "https://i.pinimg.com/1200x/34/69/8f/34698f8f407716a610a582d0b1212216.jpg"
+      ],
+      "specs": [
+        {
+          "label": "Chất liệu",
+          "value": "Da bò top-grain"
+        },
+        {
+          "label": "Khoá",
+          "value": "Tự động nano"
+        },
+        {
+          "label": "Rộng",
+          "value": "35mm"
+        },
+        {
+          "label": "Dài",
+          "value": "Cắt được"
+        }
+      ],
+      "tags": [
+        "auto-buckle",
+        "everyday"
+      ],
+      "highlights": [],
+      "rating": 4.3,
+      "reviewCount": 156,
+      "stock": 80,
+      "isNew": true,
+      "isBestSeller": false,
+      "isLuxury": false,
+      "videoUrl": null,
+      "videoPoster": null
+    },
+    {
+      "slug": "that-lung-da-van-ca-sau",
+      "name": "Thắt Lưng Da Vân Cá Sấu",
+      "brand": "IRONMAN",
+      "categorySlug": "belts",
+      "price": 890000,
+      "salePrice": null,
+      "description": "Da bò dập vân cá sấu thật, khoá liền đồng thau cổ điển. Sang trọng, bền bỉ.",
+      "images": [
+        "https://i.pinimg.com/736x/ce/de/b0/cedeb01c0bcedd8f0d00fe0ce5bf148d.jpg",
+        "https://i.pinimg.com/736x/fb/03/69/fb03691c238eaa797ddc7add5b666235.jpg",
+        "https://i.pinimg.com/736x/05/73/85/05738518049a2f7b837888b8e9ce0520.jpg"
+      ],
+      "specs": [
+        {
+          "label": "Chất liệu",
+          "value": "Da bò vân cá sấu"
+        },
+        {
+          "label": "Khoá",
+          "value": "Đồng thau antique"
+        },
+        {
+          "label": "Rộng",
+          "value": "35mm"
+        },
+        {
+          "label": "Bảo hành",
+          "value": "12 tháng"
+        }
+      ],
+      "tags": [
+        "croc-embossed",
+        "luxury"
+      ],
+      "highlights": [],
+      "rating": 4.7,
+      "reviewCount": 88,
+      "stock": 15,
+      "isNew": false,
+      "isBestSeller": false,
+      "isLuxury": true,
+      "videoUrl": null,
+      "videoPoster": null
+    },
+    {
+      "slug": "that-lung-hai-mat",
+      "name": "Thắt Lưng Hai Mặt Đen–Nâu",
+      "brand": "IRONMAN",
+      "categorySlug": "belts",
+      "price": 420000,
+      "salePrice": null,
+      "description": "Một chiếc thắt lưng, hai phong cách: mặt đen formal, mặt nâu casual. Khoá xoay 180°.",
+      "images": [
+        "https://i.pinimg.com/1200x/55/9e/2a/559e2a96af6c83a31870e790933ca8ce.jpg",
+        "https://i.pinimg.com/736x/a6/2c/c8/a62cc883fb67f89e90309d167c39480b.jpg",
+        "https://i.pinimg.com/1200x/a3/ea/37/a3ea37c3cd8abe277a647557a27dc3e8.jpg"
+      ],
+      "specs": [
+        {
+          "label": "Chất liệu",
+          "value": "Da bò split"
+        },
+        {
+          "label": "Khoá",
+          "value": "Xoay 180°"
+        },
+        {
+          "label": "Rộng",
+          "value": "33mm"
+        },
+        {
+          "label": "Màu",
+          "value": "Đen / Nâu"
+        }
+      ],
+      "tags": [
+        "reversible",
+        "versatile"
+      ],
+      "highlights": [],
+      "rating": 4.4,
+      "reviewCount": 134,
+      "stock": 42,
+      "isNew": false,
+      "isBestSeller": false,
+      "isLuxury": false,
+      "videoUrl": null,
+      "videoPoster": null
+    },
+    {
+      "slug": "that-lung-braided",
+      "name": "Thắt Lưng Bện Tay Da Bò",
+      "brand": "IRONMAN",
+      "categorySlug": "belts",
+      "price": 560000,
+      "salePrice": null,
+      "description": "Bện thủ công 8 sợi da bò, co giãn linh hoạt, không cần lỗ, thoải mái cả ngày.",
+      "images": [
+        "https://i.pinimg.com/1200x/fb/24/33/fb243371e059772cade37832b1b6e69e.jpg",
+        "https://i.pinimg.com/1200x/69/df/01/69df01e66c5e83fa5dd0b58925dfd017.jpg",
+        "https://i.pinimg.com/1200x/fd/89/2f/fd892f6abb3389f40a95d7173eb231b6.jpg"
+      ],
+      "specs": [
+        {
+          "label": "Chất liệu",
+          "value": "Da bò bện 8 sợi"
+        },
+        {
+          "label": "Khoá",
+          "value": "Inox bạc"
+        },
+        {
+          "label": "Rộng",
+          "value": "35mm"
+        },
+        {
+          "label": "Co giãn",
+          "value": "Có"
+        }
+      ],
+      "tags": [
+        "braided",
+        "casual"
+      ],
+      "highlights": [],
+      "rating": 4.5,
+      "reviewCount": 67,
+      "stock": 30,
+      "isNew": false,
+      "isBestSeller": false,
+      "isLuxury": false,
+      "videoUrl": null,
+      "videoPoster": null
+    },
+    {
+      "slug": "that-lung-montblanc-style",
+      "name": "Thắt Lưng Khoá Chữ M Premium",
+      "brand": "IRONMAN",
+      "categorySlug": "belts",
+      "price": 680000,
+      "salePrice": null,
+      "description": "Khoá chữ M mạ PVD gold, da Saffiano đen. Dòng cao cấp nhất của IRONMAN.",
+      "images": [
+        "https://i.pinimg.com/1200x/3e/d6/4d/3ed64def98f75dd47c10e380d3301f76.jpg",
+        "https://i.pinimg.com/1200x/54/6b/9d/546b9d33d2cbd67220cabf0a322149da.jpg",
+        "https://i.pinimg.com/1200x/39/d4/10/39d41025f78e031e098a1252da5ea21e.jpg"
+      ],
+      "specs": [
+        {
+          "label": "Chất liệu",
+          "value": "Da Saffiano"
+        },
+        {
+          "label": "Khoá",
+          "value": "PVD gold chữ M"
+        },
+        {
+          "label": "Rộng",
+          "value": "35mm"
+        },
+        {
+          "label": "Hộp",
+          "value": "Hộp gỗ + túi nhung"
+        }
+      ],
+      "tags": [
+        "premium",
+        "gift"
+      ],
+      "highlights": [],
+      "rating": 4.8,
+      "reviewCount": 53,
+      "stock": 12,
+      "isNew": false,
+      "isBestSeller": false,
+      "isLuxury": true,
+      "videoUrl": null,
+      "videoPoster": null
+    },
+    {
+      "slug": "vi-bifold-italy",
+      "name": "Ví Bifold Da Bò Italy",
+      "brand": "IRONMAN",
+      "categorySlug": "wallets",
+      "price": 850000,
+      "salePrice": null,
+      "description": "Da bò Italy vegetable-tanned, 8 ngăn thẻ, 2 ngăn tiền, 1 ngăn zip. Lên patina đẹp theo thời gian.",
+      "images": [
+        "https://images.unsplash.com/photo-1627123424574-724758594e93?auto=format&fit=crop&w=800&q=80",
+        "https://i.pinimg.com/1200x/eb/d5/92/ebd592fc3839b828cbffea15e5f9457e.jpg",
+        "https://i.pinimg.com/1200x/46/3d/2c/463d2cadc0d4614e9c67b58403856cca.jpg"
+      ],
+      "specs": [
+        {
+          "label": "Chất liệu",
+          "value": "Veg-tan Italy"
+        },
+        {
+          "label": "Ngăn thẻ",
+          "value": "8"
+        },
+        {
+          "label": "Kích thước",
+          "value": "11×9.5cm"
+        },
+        {
+          "label": "Màu",
+          "value": "Nâu cognac"
+        }
+      ],
+      "tags": [
+        "bifold",
+        "classic"
+      ],
+      "highlights": [],
+      "rating": 4.7,
+      "reviewCount": 189,
+      "stock": 35,
+      "isNew": false,
+      "isBestSeller": true,
+      "isLuxury": false,
+      "videoUrl": null,
+      "videoPoster": null
+    },
+    {
+      "slug": "vi-card-holder",
+      "name": "Card Holder Da Saffiano",
+      "brand": "IRONMAN",
+      "categorySlug": "wallets",
+      "price": 350000,
+      "salePrice": null,
+      "description": "6 ngăn thẻ, 1 ngăn giữa. Da Saffiano chống trầy, mỏng gọn bỏ túi trước.",
+      "images": [
+        "https://i.pinimg.com/1200x/10/e7/2b/10e72b3980b5d6def01bf4e8cdd8ba8e.jpg",
+        "https://i.pinimg.com/736x/50/e3/3b/50e33b9226a0526f01a9f4a1985ec362.jpg",
+        "https://i.pinimg.com/1200x/34/c8/69/34c869f091ee5cd0f4d80f3473e62adf.jpg"
+      ],
+      "specs": [
+        {
+          "label": "Chất liệu",
+          "value": "Da Saffiano"
+        },
+        {
+          "label": "Ngăn thẻ",
+          "value": "6"
+        },
+        {
+          "label": "Kích thước",
+          "value": "10×7.5cm"
+        },
+        {
+          "label": "Độ dày",
+          "value": "7mm"
+        }
+      ],
+      "tags": [
+        "card-holder",
+        "slim"
+      ],
+      "highlights": [],
+      "rating": 4.5,
+      "reviewCount": 234,
+      "stock": 65,
+      "isNew": true,
+      "isBestSeller": false,
+      "isLuxury": false,
+      "videoUrl": null,
+      "videoPoster": null
+    },
+    {
+      "slug": "vi-dai-da-bo",
+      "name": "Ví Dài Da Bò Zipper",
+      "brand": "IRONMAN",
+      "categorySlug": "wallets",
+      "price": 980000,
+      "salePrice": null,
+      "description": "Ví dài full-zip, 12 ngăn thẻ, 3 ngăn tiền, 1 ngăn phone. Da bò nappa mềm mịn.",
+      "images": [
+        "https://i.pinimg.com/1200x/85/43/b6/8543b6fe224c7fda9332dbb8af96cd0a.jpg",
+        "https://i.pinimg.com/736x/21/1f/ce/211fced8a24ce75b3f62f5ab920f580e.jpg",
+        "https://i.pinimg.com/736x/54/6e/b7/546eb7d247c5d38b378d000aeae03a20.jpg"
+      ],
+      "specs": [
+        {
+          "label": "Chất liệu",
+          "value": "Da nappa"
+        },
+        {
+          "label": "Ngăn thẻ",
+          "value": "12"
+        },
+        {
+          "label": "Kích thước",
+          "value": "20×10cm"
+        },
+        {
+          "label": "Khóa",
+          "value": "YKK zipper"
+        }
+      ],
+      "tags": [
+        "long-wallet",
+        "zipper"
+      ],
+      "highlights": [],
+      "rating": 4.6,
+      "reviewCount": 97,
+      "stock": 20,
+      "isNew": false,
+      "isBestSeller": false,
+      "isLuxury": true,
+      "videoUrl": null,
+      "videoPoster": null
+    },
+    {
+      "slug": "vi-money-clip",
+      "name": "Money Clip Da + Thép",
+      "brand": "IRONMAN",
+      "categorySlug": "wallets",
+      "price": 450000,
+      "salePrice": null,
+      "description": "Kẹp tiền thép phay CNC, bọc da bò hai mặt. 4 ngăn thẻ. Mỏng chỉ 8mm.",
+      "images": [
+        "https://i.pinimg.com/736x/dc/b7/f6/dcb7f6eb3fdbd389747aeb7a00cfcc0f.jpg",
+        "https://i.pinimg.com/1200x/a3/2c/9b/a32c9bc1697a2d1ef3196265a74aba5d.jpg",
+        "https://i.pinimg.com/736x/94/d1/ae/94d1ae23346772eb10d144b2343b014a.jpg"
+      ],
+      "specs": [
+        {
+          "label": "Chất liệu",
+          "value": "Da bò + thép 316L"
+        },
+        {
+          "label": "Ngăn thẻ",
+          "value": "4"
+        },
+        {
+          "label": "Kích thước",
+          "value": "10.5×7.5cm"
+        },
+        {
+          "label": "Độ dày",
+          "value": "8mm"
+        }
+      ],
+      "tags": [
+        "money-clip",
+        "minimalist"
+      ],
+      "highlights": [],
+      "rating": 4.4,
+      "reviewCount": 78,
+      "stock": 38,
+      "isNew": false,
+      "isBestSeller": false,
+      "isLuxury": false,
+      "videoUrl": null,
+      "videoPoster": null
+    },
+    {
+      "slug": "vi-passport-da",
+      "name": "Ví Passport Da Bò",
+      "brand": "IRONMAN",
+      "categorySlug": "wallets",
+      "price": 520000,
+      "salePrice": null,
+      "description": "Ngăn passport, 4 ngăn thẻ, ngăn boarding pass. Khắc tên miễn phí — quà đi du lịch lý tưởng.",
+      "images": [
+        "https://i.pinimg.com/1200x/46/3d/2c/463d2cadc0d4614e9c67b58403856cca.jpg",
+        "https://i.pinimg.com/736x/ef/d0/d0/efd0d0259d6f44ed90ef3b284183514e.jpg",
+        "https://i.pinimg.com/736x/9a/fd/31/9afd31bffb8bd246c24f575dd103fb2d.jpg"
+      ],
+      "specs": [
+        {
+          "label": "Chất liệu",
+          "value": "Da bò full-grain"
+        },
+        {
+          "label": "Ngăn",
+          "value": "Passport + 4 thẻ"
+        },
+        {
+          "label": "Kích thước",
+          "value": "14×10cm"
+        },
+        {
+          "label": "Khắc tên",
+          "value": "Miễn phí"
+        }
+      ],
+      "tags": [
+        "passport",
+        "travel",
+        "gift"
+      ],
+      "highlights": [],
+      "rating": 4.8,
+      "reviewCount": 112,
+      "stock": 25,
+      "isNew": false,
+      "isBestSeller": true,
+      "isLuxury": false,
+      "videoUrl": null,
+      "videoPoster": null
+    },
+    {
+      "slug": "vi-rfid-blocking",
+      "name": "Ví RFID Blocking Slim",
+      "brand": "IRONMAN",
+      "categorySlug": "wallets",
+      "price": 620000,
+      "salePrice": null,
+      "description": "Lớp chống RFID bảo vệ thẻ. Da carbon fiber texture, 6 ngăn thẻ, ngăn tiền mặt.",
+      "images": [
+        "https://i.pinimg.com/1200x/a9/27/0f/a9270f189c9848a910bf918ed0e3835f.jpg",
+        "https://i.pinimg.com/1200x/09/c9/bb/09c9bb6475256e2a8250384670932204.jpg",
+        "https://i.pinimg.com/1200x/9d/0c/de/9d0cdee5f635d10ce299f39a6d741544.jpg"
+      ],
+      "specs": [
+        {
+          "label": "Chất liệu",
+          "value": "Da carbon texture"
+        },
+        {
+          "label": "RFID",
+          "value": "Blocking"
+        },
+        {
+          "label": "Ngăn thẻ",
+          "value": "6"
+        },
+        {
+          "label": "Độ dày",
+          "value": "10mm"
+        }
+      ],
+      "tags": [
+        "rfid",
+        "tech",
+        "slim"
+      ],
+      "highlights": [],
+      "rating": 4.5,
+      "reviewCount": 89,
+      "stock": 30,
+      "isNew": true,
+      "isBestSeller": false,
+      "isLuxury": false,
+      "videoUrl": null,
+      "videoPoster": null
+    },
+    {
+      "slug": "fedora-len-long-cuu",
+      "name": "Fedora Len Lông Cừu Classic",
+      "brand": "IRONMAN",
+      "categorySlug": "hats",
+      "price": 680000,
+      "salePrice": null,
+      "description": "Len lông cừu Úc, vành 7cm, băng grosgrain đen. Phong cách quý ông thập niên 40.",
+      "images": [
+        "https://i.pinimg.com/1200x/cc/d7/6a/ccd76abca2485d4e7bebee50532010a2.jpg",
+        "https://i.pinimg.com/736x/48/e2/26/48e226bab1875bdfb2e6efadd4df7421.jpg",
+        "https://i.pinimg.com/736x/68/1f/e1/681fe1ba2143e351d4285b252a753757.jpg"
+      ],
+      "specs": [
+        {
+          "label": "Chất liệu",
+          "value": "Len lông cừu 100%"
+        },
+        {
+          "label": "Vành",
+          "value": "7cm"
+        },
+        {
+          "label": "Size",
+          "value": "M/L/XL"
+        },
+        {
+          "label": "Màu",
+          "value": "Đen / Xám / Nâu"
+        }
+      ],
+      "tags": [
+        "fedora",
+        "classic",
+        "wool"
+      ],
+      "highlights": [],
+      "rating": 4.7,
+      "reviewCount": 56,
+      "stock": 20,
+      "isNew": false,
+      "isBestSeller": true,
+      "isLuxury": false,
+      "videoUrl": null,
+      "videoPoster": null
+    },
+    {
+      "slug": "flat-cap-tweed",
+      "name": "Flat Cap Tweed Harris",
+      "brand": "IRONMAN",
+      "categorySlug": "hats",
+      "price": 520000,
+      "salePrice": null,
+      "description": "Vải tweed Harris Scotland, lót lụa, lưỡi trai cứng. Mũ beret Anh cổ điển.",
+      "images": [
+        "https://i.pinimg.com/1200x/15/4a/bb/154abb4b8d8cf8b291bdcab66974ccb0.jpg",
+        "https://i.pinimg.com/1200x/4f/f5/6e/4ff56e991c9050610d984af728ebe60c.jpg"
+      ],
+      "specs": [
+        {
+          "label": "Chất liệu",
+          "value": "Harris Tweed"
+        },
+        {
+          "label": "Lót",
+          "value": "Lụa"
+        },
+        {
+          "label": "Size",
+          "value": "M/L/XL"
+        },
+        {
+          "label": "Xuất xứ vải",
+          "value": "Scotland"
+        }
+      ],
+      "tags": [
+        "flat-cap",
+        "tweed",
+        "british"
+      ],
+      "highlights": [],
+      "rating": 4.6,
+      "reviewCount": 43,
+      "stock": 18,
+      "isNew": true,
+      "isBestSeller": false,
+      "isLuxury": false,
+      "videoUrl": null,
+      "videoPoster": null
+    },
+    {
+      "slug": "beret-da-nappa",
+      "name": "Beret Da Nappa Đen",
+      "brand": "IRONMAN",
+      "categorySlug": "hats",
+      "price": 750000,
+      "salePrice": null,
+      "description": "Da nappa cừu mềm mịn, lót cotton thoáng, kiểu dáng beret Pháp. Sang trọng bốn mùa.",
+      "images": [
+        "https://i.pinimg.com/1200x/78/73/cd/7873cd163419e07da52ed2adb1fe77a6.jpg",
+        "https://i.pinimg.com/1200x/11/cb/b8/11cbb8ae40f317fe395720259f746882.jpg",
+        "https://i.pinimg.com/1200x/d2/c0/15/d2c0150e26f1746ff2ebd71bb381d986.jpg"
+      ],
+      "specs": [
+        {
+          "label": "Chất liệu",
+          "value": "Da nappa cừu"
+        },
+        {
+          "label": "Lót",
+          "value": "Cotton"
+        },
+        {
+          "label": "Size",
+          "value": "M/L/XL"
+        },
+        {
+          "label": "Màu",
+          "value": "Đen"
+        }
+      ],
+      "tags": [
+        "beret",
+        "leather",
+        "french"
+      ],
+      "highlights": [],
+      "rating": 4.8,
+      "reviewCount": 31,
+      "stock": 10,
+      "isNew": false,
+      "isBestSeller": false,
+      "isLuxury": true,
+      "videoUrl": null,
+      "videoPoster": null
+    },
+    {
+      "slug": "panama-coi-thu-cong",
+      "name": "Mũ Panama Cói Ecuador",
+      "brand": "IRONMAN",
+      "categorySlug": "hats",
+      "price": 1200000,
+      "salePrice": null,
+      "description": "Cói Toquilla bện thủ công tại Ecuador. Nhẹ, thoáng, gập được. Biểu tượng mùa hè quý ông.",
+      "images": [
+        "https://i.pinimg.com/1200x/e0/5b/ec/e05bec58810a77e405a8ae03a6dc1a59.jpg",
+        "https://i.pinimg.com/1200x/33/12/0c/33120c6ce7d4107d1e2ca230bd8b634f.jpg",
+        "https://i.pinimg.com/736x/e7/da/d0/e7dad0df02a85e762fd17dd8a778b2e9.jpg"
+      ],
+      "specs": [
+        {
+          "label": "Chất liệu",
+          "value": "Cói Toquilla"
+        },
+        {
+          "label": "Bện",
+          "value": "Thủ công"
+        },
+        {
+          "label": "Vành",
+          "value": "6.5cm"
+        },
+        {
+          "label": "Xuất xứ",
+          "value": "Ecuador"
+        }
+      ],
+      "tags": [
+        "panama",
+        "handmade",
+        "summer"
+      ],
+      "highlights": [],
+      "rating": 4.9,
+      "reviewCount": 19,
+      "stock": 6,
+      "isNew": false,
+      "isBestSeller": false,
+      "isLuxury": true,
+      "videoUrl": null,
+      "videoPoster": null
+    },
+    {
+      "slug": "mu-newsboy-wool",
+      "name": "Newsboy Cap Wool Blend",
+      "brand": "IRONMAN",
+      "categorySlug": "hats",
+      "price": 450000,
+      "salePrice": null,
+      "description": "Mũ newsboy 8 múi, len pha, nút bọc trên đỉnh. Phong cách Peaky Blinders.",
+      "images": [
+        "https://i.pinimg.com/1200x/bc/4c/72/bc4c72085ef2b03ec5868342add4995e.jpg",
+        "https://i.pinimg.com/1200x/47/2a/36/472a36776a7072c712fe5e1aca856bfe.jpg",
+        "https://i.pinimg.com/1200x/e1/e4/f7/e1e4f7cbe26e009cf97026148c41dcb8.jpg"
+      ],
+      "specs": [
+        {
+          "label": "Chất liệu",
+          "value": "Len pha 80/20"
+        },
+        {
+          "label": "Kiểu",
+          "value": "8 múi"
+        },
+        {
+          "label": "Size",
+          "value": "M/L/XL"
+        },
+        {
+          "label": "Màu",
+          "value": "Xám đậm"
+        }
+      ],
+      "tags": [
+        "newsboy",
+        "peaky-blinders"
+      ],
+      "highlights": [],
+      "rating": 4.5,
+      "reviewCount": 67,
+      "stock": 25,
+      "isNew": false,
+      "isBestSeller": true,
+      "isLuxury": false,
+      "videoUrl": null,
+      "videoPoster": null
+    },
+    {
+      "slug": "mu-bucket-da-lon",
+      "name": "Bucket Hat Da Lộn",
+      "brand": "IRONMAN",
+      "categorySlug": "hats",
+      "price": 580000,
+      "salePrice": null,
+      "description": "Da lộn (suede) mềm mại, vành ngắn 5cm, kiểu dáng bucket hiện đại. Casual sang trọng.",
+      "images": [
+        "https://i.pinimg.com/1200x/1c/b2/a7/1cb2a7610488aeb35888fa60b5351542.jpg",
+        "https://i.pinimg.com/736x/f6/2c/52/f62c52f475367999bac5c895d64a10ce.jpg",
+        "https://i.pinimg.com/736x/46/46/52/46465222eba289d67fef7bee92611ff2.jpg"
+      ],
+      "specs": [
+        {
+          "label": "Chất liệu",
+          "value": "Da lộn (suede)"
+        },
+        {
+          "label": "Vành",
+          "value": "5cm"
+        },
+        {
+          "label": "Size",
+          "value": "M/L"
+        },
+        {
+          "label": "Màu",
+          "value": "Nâu camel"
+        }
+      ],
+      "tags": [
+        "bucket",
+        "suede",
+        "casual"
+      ],
+      "highlights": [],
+      "rating": 4.4,
+      "reviewCount": 38,
+      "stock": 22,
+      "isNew": true,
+      "isBestSeller": false,
+      "isLuxury": false,
+      "videoUrl": null,
+      "videoPoster": null
+    }
+  ]
+}
