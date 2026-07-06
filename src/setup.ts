@@ -1,8 +1,17 @@
 import { INestApplication, ValidationPipe } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { Request, Response, Application } from 'express';
+import helmet from 'helmet';
+import compression from 'compression';
 
 export function setupApp(app: INestApplication) {
+  // Bảo mật HTTP headers.
+  // Tắt CSP mặc định để không chặn Swagger UI nạp asset từ CDN.
+  app.use(helmet({ contentSecurityPolicy: false }));
+
+  // Nén response (gzip) — giảm kích thước payload trả về cho FE.
+  app.use(compression());
+
   // Bật CORS
   const allowedOrigins = process.env.ALLOWED_ORIGINS
     ? process.env.ALLOWED_ORIGINS.split(',')
