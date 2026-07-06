@@ -3,9 +3,11 @@ import {
   ConflictException,
   UnauthorizedException,
   NotFoundException,
+  BadRequestException,
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
+import { randomBytes } from 'node:crypto';
 import { PrismaService } from '../prisma/prisma.service';
 import { RegisterDto } from './dto/register.dto';
 import { LoginDto } from './dto/login.dto';
@@ -84,5 +86,60 @@ export class AuthService {
 
     if (!user) throw new NotFoundException('Không tìm thấy người dùng');
     return user;
+  }
+
+  /**
+   * Yêu cầu đặt lại mật khẩu: tạo token có hạn 1h.
+   * Luôn trả message chung để tránh lộ email tồn tại hay không.
+   * TODO(email): gửi link `/reset-password?token=...` qua email.
+   * Hiện chưa tích hợp SMTP → dev/non-production trả token trong response để test.
+   */
+  async forgotPassword(email: string): Promise<{ message: string; token?: string }> {
+    const user = await this.prisma.user.findUnique({ where: { email } });
+    const genericMsg = {
+      message: 'Nếu email tồn tại, hướng dẫn đặt lại mật khẩu đã được gửi.',
+    };
+    if (!user) return genericMsg;
+
+    const token = randomBytes(32).toString('hex');
+    const expiresAt = new Date(Date.now() + 60 * 60 * 1000); // 1h
+    await this.prisma.passwordResetToken.create({
+      data: { email, token, expiresAt },
+    });
+
+    // Chỉ lộ token ngoài production để tiện test khi chưa có email.
+    if (process.env.NODE_ENV !== 'production') {
+      return { ...genericMsg, token };
+    }
+    return genericMsg;
+  }
+
+  /**
+   * Đặt lại mật khẩu bằng token.
+   */
+  async resetPassword(
+    token: string,
+    newPassword: string,
+  ): Promise<{ message: string }> {
+    const record = await this.prisma.passwordResetToken.findUnique({
+      where: { token },
+    });
+    if (!record || record.usedAt || record.expiresAt < new Date()) {
+      throw new BadRequestException('Token không hợp lệ hoặc đã hết hạn');
+    }
+
+    const hashedPassword = await bcrypt.hash(newPassword, this.saltRounds);
+    await this.prisma.$transaction([
+      this.prisma.user.update({
+        where: { email: record.email },
+        data: { password: hashedPassword },
+      }),
+      this.prisma.passwordResetToken.update({
+        where: { token },
+        data: { usedAt: new Date() },
+      }),
+    ]);
+
+    return { message: 'Đặt lại mật khẩu thành công' };
   }
 }

@@ -49,6 +49,13 @@ export class ProductCategoryController {
     return this.service.findAll();
   }
 
+  @Get('slug/:slug')
+  @Header('Cache-Control', 'public, s-maxage=60, stale-while-revalidate=300')
+  @ApiOperation({ summary: 'Lấy danh mục theo slug' })
+  findBySlug(@Param('slug') slug: string) {
+    return this.service.findBySlug(slug);
+  }
+
   @Get(':id')
   @ApiOperation({ summary: 'Lấy chi tiết danh mục sản phẩm' })
   findOne(@Param('id') id: string) {

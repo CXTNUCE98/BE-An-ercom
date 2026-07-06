@@ -34,6 +34,11 @@ enum PaymentMethod {
   MOMO
 }
 
+enum CouponType {
+  PERCENT
+  FIXED
+}
+
 // ─── User ─────────────────────────────────────────────────────────────────────
 
 model User {
@@ -51,6 +56,8 @@ model User {
 
   orders    Order[]
   reviews   Review[]
+  wishlist  Wishlist[]
+  addresses Address[]
 
   @@map("users")
 }
@@ -94,12 +101,16 @@ model Product {
   highlights   String[]      @default([])
   categoryId   String?
   category     ProductCategory? @relation(fields: [categoryId], references: [id])
+  deletedAt    DateTime?
   createdAt    DateTime      @default(now())
   updatedAt    DateTime      @updatedAt
 
   orderItems   OrderItem[]
   reviews      Review[]
+  wishlist     Wishlist[]
+  comboItems   ComboItem[]
 
+  @@index([deletedAt])
   @@index([status])
   @@index([categoryId])
   @@index([brand])
@@ -152,10 +163,115 @@ model Review {
   productId String
   rating    Int
   comment   String?
+  isApproved Boolean @default(false)
   createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   user      User     @relation(fields: [userId], references: [id])
   product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
 
+  @@unique([userId, productId])
+  @@index([productId])
+  @@index([isApproved])
   @@map("reviews")
+}
+
+model Coupon {
+  id           String     @id @default(uuid())
+  code         String     @unique
+  type         CouponType @default(PERCENT)
+  value        Int
+  minOrder     Int        @default(0)
+  maxDiscount  Int?
+  usageLimit   Int?
+  usedCount    Int        @default(0)
+  startsAt     DateTime?
+  expiresAt    DateTime?
+  isActive     Boolean    @default(true)
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+
+  @@map("coupons")
+}
+
+// ─── Wishlist ───────────────────────────────────────────────────────────────
+
+model Wishlist {
+  id        String   @id @default(uuid())
+  userId    String
+  productId String
+  createdAt DateTime @default(now())
+
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, productId])
+  @@index([userId])
+  @@map("wishlists")
+}
+
+// ─── Address book ─────────────────────────────────────────────────────────────
+
+model Address {
+  id        String   @id @default(uuid())
+  userId    String
+  fullName  String
+  phone     String
+  line      String
+  ward      String?
+  district  String?
+  province  String
+  isDefault Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@map("addresses")
+}
+
+// ─── Combo / Bundle ───────────────────────────────────────────────────────────
+
+model Combo {
+  id           String      @id @default(uuid())
+  slug         String      @unique
+  name         String
+  description  String?
+  image        String?
+  comboPrice   Int
+  isActive     Boolean     @default(true)
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+
+  items        ComboItem[]
+
+  @@map("combos")
+}
+
+model ComboItem {
+  id        String  @id @default(uuid())
+  comboId   String
+  productId String
+  quantity  Int     @default(1)
+
+  combo     Combo   @relation(fields: [comboId], references: [id], onDelete: Cascade)
+  product   Product @relation(fields: [productId], references: [id])
+
+  @@index([comboId])
+  @@map("combo_items")
+}
+
+// ─── Password reset ─────────────────────────────────────────────────────────
+
+model PasswordResetToken {
+  id        String   @id @default(uuid())
+  email     String
+  token     String   @unique
+  expiresAt DateTime
+  usedAt    DateTime?
+  createdAt DateTime @default(now())
+
+  @@index([email])
+  @@map("password_reset_tokens")
 }

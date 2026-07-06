@@ -7,10 +7,21 @@ import {
   Min,
   Max,
   IsEnum,
+  ValidateNested,
 } from 'class-validator';
 import { ApiProperty, ApiPropertyOptional, PartialType } from '@nestjs/swagger';
-import { Type } from 'class-transformer';
+import { Type, Transform } from 'class-transformer';
 import { ProductStatus } from '@prisma/client';
+
+export class ProductSpecDto {
+  @ApiProperty({ example: 'Bộ máy' })
+  @IsString()
+  readonly label: string;
+
+  @ApiProperty({ example: 'Automatic' })
+  @IsString()
+  readonly value: string;
+}
 
 export class CreateProductDto {
   @ApiProperty({ example: 'Seiko 5 Xanh Lá' })
@@ -102,6 +113,13 @@ export class CreateProductDto {
   @IsOptional()
   @IsString()
   readonly categoryId?: string;
+
+  @ApiPropertyOptional({ type: [ProductSpecDto], description: 'Thông số kỹ thuật' })
+  @IsOptional()
+  @IsArray()
+  @ValidateNested({ each: true })
+  @Type(() => ProductSpecDto)
+  readonly specs?: ProductSpecDto[];
 }
 
 export class UpdateProductDto extends PartialType(CreateProductDto) {}
@@ -126,6 +144,29 @@ export class ProductQueryDto {
   @IsOptional()
   @IsString()
   readonly brand?: string;
+
+  @ApiPropertyOptional({ description: 'Giá tối thiểu' })
+  @IsOptional()
+  @Type(() => Number)
+  @IsInt()
+  @Min(0)
+  readonly priceMin?: number;
+
+  @ApiPropertyOptional({ description: 'Giá tối đa' })
+  @IsOptional()
+  @Type(() => Number)
+  @IsInt()
+  @Min(0)
+  readonly priceMax?: number;
+
+  @ApiPropertyOptional({ description: 'Lọc theo tags (phân cách dấu phẩy hoặc mảng)' })
+  @IsOptional()
+  @Transform(({ value }) =>
+    Array.isArray(value) ? value : typeof value === 'string' ? value.split(',').filter(Boolean) : undefined,
+  )
+  @IsArray()
+  @IsString({ each: true })
+  readonly tags?: string[];
 
   @ApiPropertyOptional({ enum: ProductStatus })
   @IsOptional()

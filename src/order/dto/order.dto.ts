@@ -48,6 +48,11 @@ export class CreateOrderDto {
   @IsOptional()
   @IsEnum(PaymentMethod)
   readonly paymentMethod?: PaymentMethod;
+
+  @ApiPropertyOptional({ description: 'Mã giảm giá (tuỳ chọn)' })
+  @IsOptional()
+  @IsString()
+  readonly couponCode?: string;
 }
 
 export class UpdateOrderStatusDto {

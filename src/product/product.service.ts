@@ -68,7 +68,11 @@ export class ProductService {
       throw new ConflictException('Slug sản phẩm đã tồn tại');
     }
     const created = await this.prisma.product.create({
-      data: { ...dto, specs: [], images: dto.images ?? [] },
+      data: {
+        ...dto,
+        specs: (dto.specs ?? []) as unknown as Prisma.InputJsonValue,
+        images: dto.images ?? [],
+      },
       include: { category: true },
     });
     return flattenCategory(created);
@@ -83,17 +87,33 @@ export class ProductService {
       categoryId,
       categorySlug,
       brand,
+      priceMin,
+      priceMax,
+      tags,
       status,
       page = 1,
       pageSize = 12,
       sort,
     } = query;
 
+    const priceFilter =
+      priceMin !== undefined || priceMax !== undefined
+        ? {
+            price: {
+              ...(priceMin !== undefined && { gte: priceMin }),
+              ...(priceMax !== undefined && { lte: priceMax }),
+            },
+          }
+        : {};
+
     const where: Prisma.ProductWhereInput = {
+      deletedAt: null,
       ...(status && { status }),
       ...(brand && { brand: { contains: brand, mode: 'insensitive' } }),
       ...(categoryId && { categoryId }),
       ...(categorySlug && { category: { slug: categorySlug } }),
+      ...(tags && tags.length > 0 && { tags: { hasSome: tags } }),
+      ...priceFilter,
       ...(search && {
         OR: [
           { name: { contains: search, mode: 'insensitive' } },
@@ -130,8 +150,8 @@ export class ProductService {
    * Lấy chi tiết sản phẩm theo id
    */
   async findOne(id: string) {
-    const product = await this.prisma.product.findUnique({
-      where: { id },
+    const product = await this.prisma.product.findFirst({
+      where: { id, deletedAt: null },
       include: { category: true },
     });
     if (!product) {
@@ -144,8 +164,8 @@ export class ProductService {
    * Lấy chi tiết sản phẩm theo slug
    */
   async findBySlug(slug: string) {
-    const product = await this.prisma.product.findUnique({
-      where: { slug },
+    const product = await this.prisma.product.findFirst({
+      where: { slug, deletedAt: null },
       include: { category: true },
     });
     if (!product) {
@@ -159,20 +179,27 @@ export class ProductService {
    */
   async update(id: string, dto: UpdateProductDto) {
     await this.findOne(id);
+    const { specs, ...rest } = dto;
     const updated = await this.prisma.product.update({
       where: { id },
-      data: dto,
+      data: {
+        ...rest,
+        ...(specs !== undefined && { specs: specs as unknown as Prisma.InputJsonValue }),
+      },
       include: { category: true },
     });
     return flattenCategory(updated);
   }
 
   /**
-   * Xóa sản phẩm
+   * Xóa mềm sản phẩm (giữ dữ liệu để không vỡ FK OrderItem + URL SEO).
    */
   async remove(id: string) {
     await this.findOne(id);
-    return this.prisma.product.delete({ where: { id } });
+    return this.prisma.product.update({
+      where: { id },
+      data: { deletedAt: new Date(), status: 'INACTIVE' },
+    });
   }
 
   /**
@@ -180,9 +207,9 @@ export class ProductService {
    */
   async getStats() {
     const [total, active, outOfStock] = await Promise.all([
-      this.prisma.product.count(),
-      this.prisma.product.count({ where: { status: ProductStatus.ACTIVE } }),
-      this.prisma.product.count({ where: { status: ProductStatus.OUT_OF_STOCK } }),
+      this.prisma.product.count({ where: { deletedAt: null } }),
+      this.prisma.product.count({ where: { deletedAt: null, status: ProductStatus.ACTIVE } }),
+      this.prisma.product.count({ where: { deletedAt: null, status: ProductStatus.OUT_OF_STOCK } }),
     ]);
     return { total, active, outOfStock };
   }

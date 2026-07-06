@@ -12,6 +12,11 @@ import { ProductModule } from './product/product.module';
 import { OrderModule } from './order/order.module';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { UploadModule } from './upload/upload.module';
+import { CouponModule } from './coupon/coupon.module';
+import { ReviewModule } from './review/review.module';
+import { WishlistModule } from './wishlist/wishlist.module';
+import { AddressModule } from './address/address.module';
+import { ComboModule } from './combo/combo.module';
 
 /**
  * Module gốc của ứng dụng An-ercom
@@ -34,6 +39,11 @@ import { UploadModule } from './upload/upload.module';
     OrderModule,
     DashboardModule,
     UploadModule,
+    CouponModule,
+    ReviewModule,
+    WishlistModule,
+    AddressModule,
+    ComboModule,
   ],
   controllers: [AppController],
   providers: [

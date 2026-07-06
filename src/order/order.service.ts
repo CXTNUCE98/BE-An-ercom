@@ -6,6 +6,7 @@ import {
 } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
+import { CouponService } from '../coupon/coupon.service';
 import {
   CreateOrderDto,
   UpdateOrderStatusDto,
@@ -36,7 +37,10 @@ const ORDER_INCLUDE = {
  */
 @Injectable()
 export class OrderService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(
+    private readonly prisma: PrismaService,
+    private readonly couponService: CouponService,
+  ) {}
 
   /**
    * Tạo đơn hàng mới
@@ -62,11 +66,19 @@ export class OrderService {
       }
     }
 
-    const totalPrice = dto.items.reduce((sum, item) => {
+    const subtotal = dto.items.reduce((sum, item) => {
       const product = productMap.get(item.productId)!;
       const price = product.salePrice ?? product.price;
       return sum + price * item.quantity;
     }, 0);
+
+    // Áp mã giảm giá (nếu có) — BE tự tính lại, không tin client.
+    let discount = 0;
+    if (dto.couponCode) {
+      const applied = await this.couponService.apply(dto.couponCode, subtotal);
+      discount = applied.discount;
+    }
+    const totalPrice = Math.max(0, subtotal - discount);
 
     const order = await this.prisma.$transaction(async (tx) => {
       const newOrder = await tx.order.create({
@@ -91,15 +103,27 @@ export class OrderService {
         include: ORDER_INCLUDE,
       });
 
+      // Trừ kho có điều kiện để chống oversell khi tải cao.
       for (const item of dto.items) {
-        await tx.product.update({
-          where: { id: item.productId },
+        const res = await tx.product.updateMany({
+          where: { id: item.productId, stock: { gte: item.quantity } },
           data: { stock: { decrement: item.quantity } },
         });
+        if (res.count === 0) {
+          const product = productMap.get(item.productId)!;
+          throw new BadRequestException(
+            `Sản phẩm "${product.name}" không đủ số lượng trong kho`,
+          );
+        }
       }
 
       return newOrder;
     });
+
+    // Tăng lượt dùng coupon sau khi đơn tạo thành công.
+    if (dto.couponCode) {
+      await this.couponService.incrementUsage(dto.couponCode);
+    }
 
     return order;
   }
