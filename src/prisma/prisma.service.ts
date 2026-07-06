@@ -13,7 +13,14 @@ export class PrismaService implements OnModuleInit, OnModuleDestroy {
 
   constructor() {
     const connectionString = process.env.DATABASE_URL;
-    this.pool = new Pool({ connectionString });
+    // Serverless (Vercel): mỗi function instance nên giữ pool nhỏ để không
+    // làm cạn số connection của Neon. connectionTimeout tránh treo vô hạn.
+    this.pool = new Pool({
+      connectionString,
+      max: Number(process.env.PG_POOL_MAX ?? 1),
+      idleTimeoutMillis: 10_000,
+      connectionTimeoutMillis: 10_000,
+    });
     const adapter = new PrismaPg(this.pool);
     this.client = new PrismaClient({ adapter });
   }
@@ -33,6 +40,12 @@ export class PrismaService implements OnModuleInit, OnModuleDestroy {
 
   $transaction: PrismaClient['$transaction'] = (...args: any[]) =>
     (this.client.$transaction as any)(...args);
+
+  $queryRaw: PrismaClient['$queryRaw'] = (...args: any[]) =>
+    (this.client.$queryRaw as any)(...args);
+
+  $queryRawUnsafe: PrismaClient['$queryRawUnsafe'] = (...args: any[]) =>
+    (this.client.$queryRawUnsafe as any)(...args);
 
   $connect() { return this.client.$connect(); }
   $disconnect() { return this.client.$disconnect(); }

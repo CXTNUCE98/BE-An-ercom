@@ -32,29 +32,46 @@ export class DashboardService {
   }
 
   /**
-   * Lấy dữ liệu doanh thu theo tháng (12 tháng gần nhất)
+   * Lấy dữ liệu doanh thu theo tháng (12 tháng gần nhất).
+   * Gộp thành 1 query duy nhất (date_trunc) thay vì 12 query tuần tự
+   * → giảm mạnh độ trễ, đặc biệt khi DB ở xa.
    */
   async getMonthlySales() {
     const now = new Date();
-    const months: { month: string; revenue: number; orders: number }[] = [];
+    // Mốc đầu: ngày 1 của tháng cách đây 11 tháng.
+    const start = new Date(now.getFullYear(), now.getMonth() - 11, 1);
 
+    const rows = await this.prisma.$queryRaw<
+      { month: Date; revenue: bigint | number | null; orders: bigint | number }[]
+    >`
+      SELECT date_trunc('month', "createdAt") AS month,
+             SUM("totalPrice")               AS revenue,
+             COUNT(*)                         AS orders
+      FROM "orders"
+      WHERE "status" = 'DELIVERED'
+        AND "createdAt" >= ${start}
+      GROUP BY 1
+    `;
+
+    // Map kết quả theo key YYYY-M để tra cứu nhanh.
+    const byKey = new Map<string, { revenue: number; orders: number }>();
+    for (const r of rows) {
+      const d = new Date(r.month);
+      byKey.set(`${d.getFullYear()}-${d.getMonth()}`, {
+        revenue: Number(r.revenue ?? 0),
+        orders: Number(r.orders ?? 0),
+      });
+    }
+
+    // Dựng đủ 12 tháng (kể cả tháng không có đơn = 0).
+    const months: { month: string; revenue: number; orders: number }[] = [];
     for (let i = 11; i >= 0; i--) {
       const date = new Date(now.getFullYear(), now.getMonth() - i, 1);
-      const nextDate = new Date(now.getFullYear(), now.getMonth() - i + 1, 1);
-
-      const result = await this.prisma.order.aggregate({
-        _sum: { totalPrice: true },
-        _count: { id: true },
-        where: {
-          status: 'DELIVERED',
-          createdAt: { gte: date, lt: nextDate },
-        },
-      });
-
+      const hit = byKey.get(`${date.getFullYear()}-${date.getMonth()}`);
       months.push({
         month: date.toLocaleDateString('vi-VN', { month: 'short', year: 'numeric' }),
-        revenue: result._sum.totalPrice ?? 0,
-        orders: result._count.id,
+        revenue: hit?.revenue ?? 0,
+        orders: hit?.orders ?? 0,
       });
     }
 
