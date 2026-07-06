@@ -8,6 +8,7 @@ import {
   Delete,
   UseGuards,
   Query,
+  Header,
 } from '@nestjs/common';
 import {
   ApiTags,
@@ -16,6 +17,9 @@ import {
   ApiBearerAuth,
 } from '@nestjs/swagger';
 import { ProductService } from './product.service';
+
+/** Cache CDN cho các GET công khai: 60s tươi, 300s stale-while-revalidate */
+const PUBLIC_CACHE = 'public, s-maxage=60, stale-while-revalidate=300';
 import {
   CreateProductDto,
   UpdateProductDto,
@@ -44,6 +48,7 @@ export class ProductController {
   }
 
   @Get()
+  @Header('Cache-Control', PUBLIC_CACHE)
   @ApiOperation({ summary: 'Lấy danh sách sản phẩm (có phân trang, lọc, sắp xếp)' })
   findAll(@Query() query: ProductQueryDto) {
     return this.productService.findAll(query);
@@ -59,6 +64,7 @@ export class ProductController {
   }
 
   @Get('slug/:slug')
+  @Header('Cache-Control', PUBLIC_CACHE)
   @ApiOperation({ summary: 'Lấy sản phẩm theo slug' })
   findBySlug(@Param('slug') slug: string) {
     return this.productService.findBySlug(slug);

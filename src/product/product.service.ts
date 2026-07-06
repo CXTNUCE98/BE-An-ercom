@@ -14,6 +14,45 @@ import {
 /**
  * Dịch vụ quản lý sản phẩm
  */
+/**
+ * Các field tối thiểu cần cho card sản phẩm trên lưới storefront.
+ * Không trả description / specs / tags / highlights để giảm payload.
+ */
+const PRODUCT_CARD_SELECT = {
+  id: true,
+  slug: true,
+  name: true,
+  brand: true,
+  price: true,
+  salePrice: true,
+  images: true,
+  rating: true,
+  reviewCount: true,
+  stock: true,
+  status: true,
+  isNew: true,
+  isBestSeller: true,
+  isLuxury: true,
+  createdAt: true,
+  category: { select: { slug: true, name: true } },
+} satisfies Prisma.ProductSelect;
+
+type ProductWithCategory = {
+  category?: { slug: string; name: string } | null;
+} & Record<string, unknown>;
+
+/**
+ * Phẳng hoá quan hệ category thành categorySlug + categoryName để khớp
+ * hợp đồng FE, đồng thời vẫn giữ nested `category` cho tương thích ngược.
+ */
+function flattenCategory<T extends ProductWithCategory>(product: T) {
+  return {
+    ...product,
+    categorySlug: product.category?.slug ?? null,
+    categoryName: product.category?.name ?? null,
+  };
+}
+
 @Injectable()
 export class ProductService {
   constructor(private readonly prisma: PrismaService) {}
@@ -28,10 +67,11 @@ export class ProductService {
     if (existing) {
       throw new ConflictException('Slug sản phẩm đã tồn tại');
     }
-    return this.prisma.product.create({
+    const created = await this.prisma.product.create({
       data: { ...dto, specs: [], images: dto.images ?? [] },
       include: { category: true },
     });
+    return flattenCategory(created);
   }
 
   /**
@@ -72,13 +112,13 @@ export class ProductService {
         orderBy,
         skip,
         take: pageSize,
-        include: { category: true },
+        select: PRODUCT_CARD_SELECT,
       }),
       this.prisma.product.count({ where }),
     ]);
 
     return {
-      items,
+      items: items.map(flattenCategory),
       total,
       page,
       pageSize,
@@ -97,7 +137,7 @@ export class ProductService {
     if (!product) {
       throw new NotFoundException('Không tìm thấy sản phẩm');
     }
-    return product;
+    return flattenCategory(product);
   }
 
   /**
@@ -111,7 +151,7 @@ export class ProductService {
     if (!product) {
       throw new NotFoundException('Không tìm thấy sản phẩm');
     }
-    return product;
+    return flattenCategory(product);
   }
 
   /**
@@ -119,11 +159,12 @@ export class ProductService {
    */
   async update(id: string, dto: UpdateProductDto) {
     await this.findOne(id);
-    return this.prisma.product.update({
+    const updated = await this.prisma.product.update({
       where: { id },
       data: dto,
       include: { category: true },
     });
+    return flattenCategory(updated);
   }
 
   /**

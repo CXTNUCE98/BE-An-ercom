@@ -7,6 +7,7 @@ import {
   Param,
   Delete,
   UseGuards,
+  Header,
 } from '@nestjs/common';
 import {
   ApiTags,
@@ -42,6 +43,7 @@ export class ProductCategoryController {
   }
 
   @Get()
+  @Header('Cache-Control', 'public, s-maxage=60, stale-while-revalidate=300')
   @ApiOperation({ summary: 'Lấy tất cả danh mục sản phẩm' })
   findAll() {
     return this.service.findAll();
