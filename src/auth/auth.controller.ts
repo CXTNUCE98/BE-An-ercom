@@ -14,6 +14,7 @@ import { LoginDto } from './dto/login.dto';
 import { UserResponseDto } from './dto/user-response.dto';
 import { JwtAuthGuard } from './guards/jwt-auth.guard';
 import type { AuthenticatedRequest } from '../common/interfaces/request.interface';
+import { Throttle } from '@nestjs/throttler';
 import {
   ApiTags,
   ApiOperation,
@@ -33,6 +34,7 @@ export class AuthController {
    * Endpoint đăng ký người dùng mới
    */
   @Post('register')
+  @Throttle({ default: { ttl: 60_000, limit: 5 } })
   @ApiOperation({ summary: 'Đăng ký tài khoản người dùng mới' })
   @ApiResponse({ status: 201, description: 'Đăng ký thành công' })
   @ApiResponse({
@@ -49,6 +51,7 @@ export class AuthController {
    * Endpoint đăng nhập người dùng
    */
   @Post('login')
+  @Throttle({ default: { ttl: 60_000, limit: 5 } })
   @ApiOperation({ summary: 'Đăng nhập vào hệ thống' })
   @ApiResponse({
     status: 200,

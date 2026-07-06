@@ -70,8 +70,8 @@ export class OrderController {
 
   @Get(':id')
   @ApiOperation({ summary: 'Lấy chi tiết đơn hàng' })
-  findOne(@Param('id') id: string) {
-    return this.orderService.findOne(id);
+  findOne(@Req() req: AuthenticatedRequest, @Param('id') id: string) {
+    return this.orderService.findOne(id, req.user);
   }
 
   @Patch(':id/status')

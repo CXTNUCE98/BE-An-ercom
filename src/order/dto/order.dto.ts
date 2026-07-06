@@ -5,6 +5,7 @@ import {
   IsEnum,
   IsOptional,
   Min,
+  Max,
   ValidateNested,
 } from 'class-validator';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
@@ -68,10 +69,11 @@ export class OrderQueryDto {
   @Min(1)
   readonly page?: number = 1;
 
-  @ApiPropertyOptional({ example: 10 })
+  @ApiPropertyOptional({ example: 10, maximum: 100 })
   @IsOptional()
   @Type(() => Number)
   @IsInt()
   @Min(1)
+  @Max(100)
   readonly pageSize?: number = 10;
 }

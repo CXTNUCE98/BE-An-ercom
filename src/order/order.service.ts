@@ -2,6 +2,7 @@ import {
   Injectable,
   NotFoundException,
   BadRequestException,
+  ForbiddenException,
 } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
@@ -153,15 +154,26 @@ export class OrderService {
   }
 
   /**
-   * Lấy chi tiết đơn hàng
+   * Lấy chi tiết đơn hàng.
+   * Chủ đơn chỉ được xem đơn của chính mình; ADMIN xem được mọi đơn.
    */
-  async findOne(id: string) {
+  async findOne(
+    id: string,
+    requester?: { userId: string; role: string },
+  ) {
     const order = await this.prisma.order.findUnique({
       where: { id },
       include: ORDER_INCLUDE,
     });
     if (!order) {
       throw new NotFoundException('Không tìm thấy đơn hàng');
+    }
+    if (
+      requester &&
+      requester.role !== 'ADMIN' &&
+      order.userId !== requester.userId
+    ) {
+      throw new ForbiddenException('Bạn không có quyền xem đơn hàng này');
     }
     return order;
   }
