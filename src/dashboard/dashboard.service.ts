@@ -69,7 +69,8 @@ export class DashboardService {
       const date = new Date(now.getFullYear(), now.getMonth() - i, 1);
       const hit = byKey.get(`${date.getFullYear()}-${date.getMonth()}`);
       months.push({
-        month: date.toLocaleDateString('vi-VN', { month: 'short', year: 'numeric' }),
+        // Định dạng MM/YYYY, ví dụ tháng 8 năm 2025 -> "08/2025".
+        month: `${String(date.getMonth() + 1).padStart(2, '0')}/${date.getFullYear()}`,
         revenue: hit?.revenue ?? 0,
         orders: hit?.orders ?? 0,
       });

@@ -17,6 +17,7 @@ import { ReviewModule } from './review/review.module';
 import { WishlistModule } from './wishlist/wishlist.module';
 import { AddressModule } from './address/address.module';
 import { ComboModule } from './combo/combo.module';
+import { LocationModule } from './location/location.module';
 
 /**
  * Module gốc của ứng dụng An-ercom
@@ -44,6 +45,7 @@ import { ComboModule } from './combo/combo.module';
     WishlistModule,
     AddressModule,
     ComboModule,
+    LocationModule,
   ],
   controllers: [AppController],
   providers: [

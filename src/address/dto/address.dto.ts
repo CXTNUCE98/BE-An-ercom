@@ -1,4 +1,4 @@
-import { IsString, IsOptional, IsBoolean } from 'class-validator';
+import { IsString, IsOptional, IsBoolean, Matches } from 'class-validator';
 import { ApiProperty, ApiPropertyOptional, PartialType } from '@nestjs/swagger';
 
 export class CreateAddressDto {
@@ -8,25 +8,20 @@ export class CreateAddressDto {
 
   @ApiProperty({ example: '0901234567' })
   @IsString()
+  @Matches(/^(0|\+84)\d{9,10}$/, { message: 'Số điện thoại không hợp lệ' })
   readonly phone: string;
 
-  @ApiProperty({ example: '123 Nguyễn Huệ' })
+  @ApiProperty({ example: '123 Nguyễn Huệ', description: 'Số nhà, tên đường' })
   @IsString()
   readonly line: string;
 
-  @ApiPropertyOptional({ example: 'Phường Bến Nghé' })
-  @IsOptional()
+  @ApiProperty({ example: '79', description: 'Mã tỉnh/thành (GET /locations/provinces)' })
   @IsString()
-  readonly ward?: string;
+  readonly provinceCode: string;
 
-  @ApiPropertyOptional({ example: 'Quận 1' })
-  @IsOptional()
+  @ApiProperty({ example: '26740', description: 'Mã phường/xã (GET /locations/provinces/:code/wards)' })
   @IsString()
-  readonly district?: string;
-
-  @ApiProperty({ example: 'TP.HCM' })
-  @IsString()
-  readonly province: string;
+  readonly wardCode: string;
 
   @ApiPropertyOptional({ default: false })
   @IsOptional()
