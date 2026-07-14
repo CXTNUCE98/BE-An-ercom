@@ -18,6 +18,8 @@ import { WishlistModule } from './wishlist/wishlist.module';
 import { AddressModule } from './address/address.module';
 import { ComboModule } from './combo/combo.module';
 import { LocationModule } from './location/location.module';
+import { CartModule } from './cart/cart.module';
+import { MailModule } from './mail/mail.module';
 
 /**
  * Module gốc của ứng dụng An-ercom
@@ -46,6 +48,8 @@ import { LocationModule } from './location/location.module';
     AddressModule,
     ComboModule,
     LocationModule,
+    CartModule,
+    MailModule,
   ],
   controllers: [AppController],
   providers: [

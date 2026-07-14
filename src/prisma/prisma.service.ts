@@ -36,6 +36,8 @@ export class PrismaService implements OnModuleInit, OnModuleDestroy {
   get address() { return this.client.address; }
   get combo() { return this.client.combo; }
   get comboItem() { return this.client.comboItem; }
+  get cart() { return this.client.cart; }
+  get cartItem() { return this.client.cartItem; }
   get passwordResetToken() { return this.client.passwordResetToken; }
 
   $transaction: PrismaClient['$transaction'] = (...args: any[]) =>

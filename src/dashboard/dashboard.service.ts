@@ -85,12 +85,16 @@ export class DashboardService {
   async getTopProducts(limit: number = 5) {
     const topItems = await this.prisma.orderItem.groupBy({
       by: ['productId'],
+      // Bỏ qua dòng đơn dạng combo (productId = null).
+      where: { productId: { not: null } },
       _sum: { quantity: true },
       orderBy: { _sum: { quantity: 'desc' } },
       take: limit,
     });
 
-    const productIds = topItems.map((item) => item.productId);
+    const productIds = topItems
+      .map((item) => item.productId)
+      .filter((id): id is string => id !== null);
     const products = await this.prisma.product.findMany({
       where: { id: { in: productIds } },
       select: { id: true, name: true, images: true, price: true, brand: true },
@@ -98,10 +102,12 @@ export class DashboardService {
 
     const productMap = new Map(products.map((p) => [p.id, p]));
 
-    return topItems.map((item) => ({
-      product: productMap.get(item.productId),
-      totalSold: item._sum.quantity ?? 0,
-    }));
+    return topItems
+      .filter((item) => item.productId !== null)
+      .map((item) => ({
+        product: productMap.get(item.productId!),
+        totalSold: item._sum.quantity ?? 0,
+      }));
   }
 
   /**

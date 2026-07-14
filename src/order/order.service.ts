@@ -4,9 +4,10 @@ import {
   BadRequestException,
   ForbiddenException,
 } from '@nestjs/common';
-import { Prisma } from '@prisma/client';
+import { Prisma, OrderStatus } from '@prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
 import { CouponService } from '../coupon/coupon.service';
+import { MailService } from '../mail/mail.service';
 import {
   CreateOrderDto,
   UpdateOrderStatusDto,
@@ -25,6 +26,14 @@ const ORDER_INCLUDE = {
           brand: true,
         },
       },
+      combo: {
+        select: {
+          id: true,
+          name: true,
+          slug: true,
+          image: true,
+        },
+      },
     },
   },
   user: {
@@ -40,37 +49,104 @@ export class OrderService {
   constructor(
     private readonly prisma: PrismaService,
     private readonly couponService: CouponService,
+    private readonly mailService: MailService,
   ) {}
 
   /**
-   * Tạo đơn hàng mới
+   * Tạo đơn hàng mới. Mỗi dòng đơn là sản phẩm lẻ (productId) hoặc combo (comboId).
+   * BE tự tính lại giá, giữ giá combo ưu đãi, và trừ kho từng sản phẩm con của combo.
    */
   async create(userId: string, dto: CreateOrderDto) {
-    const productIds = dto.items.map((item) => item.productId);
-    const products = await this.prisma.product.findMany({
-      where: { id: { in: productIds } },
-    });
-
-    if (products.length !== productIds.length) {
-      throw new NotFoundException('Một hoặc nhiều sản phẩm không tồn tại');
-    }
-
-    const productMap = new Map(products.map((p) => [p.id, p]));
-
+    // Mỗi item phải là product HOẶC combo, không cả hai / không rỗng.
     for (const item of dto.items) {
-      const product = productMap.get(item.productId)!;
-      if (product.stock < item.quantity) {
+      const hasProduct = !!item.productId;
+      const hasCombo = !!item.comboId;
+      if (hasProduct === hasCombo) {
         throw new BadRequestException(
-          `Sản phẩm "${product.name}" không đủ số lượng trong kho`,
+          'Mỗi dòng đơn phải là một sản phẩm hoặc một combo',
         );
       }
     }
 
-    const subtotal = dto.items.reduce((sum, item) => {
-      const product = productMap.get(item.productId)!;
-      const price = product.salePrice ?? product.price;
-      return sum + price * item.quantity;
-    }, 0);
+    const productIds = [
+      ...new Set(dto.items.filter((i) => i.productId).map((i) => i.productId!)),
+    ];
+    const comboIds = [
+      ...new Set(dto.items.filter((i) => i.comboId).map((i) => i.comboId!)),
+    ];
+
+    const [products, combos] = await Promise.all([
+      this.prisma.product.findMany({ where: { id: { in: productIds } } }),
+      this.prisma.combo.findMany({
+        where: { id: { in: comboIds } },
+        include: { items: true },
+      }),
+    ]);
+
+    if (products.length !== productIds.length) {
+      throw new NotFoundException('Một hoặc nhiều sản phẩm không tồn tại');
+    }
+    if (combos.length !== comboIds.length) {
+      throw new NotFoundException('Một hoặc nhiều combo không tồn tại');
+    }
+
+    const productMap = new Map(products.map((p) => [p.id, p]));
+    const comboMap = new Map(combos.map((c) => [c.id, c]));
+
+    // Gộp tổng số lượng cần trừ kho theo từng sản phẩm (kể cả từ combo).
+    const stockNeeded = new Map<string, number>();
+    const addStock = (pid: string, qty: number) =>
+      stockNeeded.set(pid, (stockNeeded.get(pid) ?? 0) + qty);
+
+    let subtotal = 0;
+    const itemsData: {
+      productId: string | null;
+      comboId: string | null;
+      quantity: number;
+      price: number;
+    }[] = [];
+
+    for (const item of dto.items) {
+      if (item.productId) {
+        const product = productMap.get(item.productId)!;
+        const price = product.salePrice ?? product.price;
+        subtotal += price * item.quantity;
+        addStock(product.id, item.quantity);
+        itemsData.push({
+          productId: product.id,
+          comboId: null,
+          quantity: item.quantity,
+          price,
+        });
+      } else {
+        const combo = comboMap.get(item.comboId!)!;
+        if (!combo.isActive) {
+          throw new BadRequestException(`Combo "${combo.name}" không còn bán`);
+        }
+        subtotal += combo.comboPrice * item.quantity;
+        // Trừ kho từng sản phẩm con theo số lượng combo.
+        for (const ci of combo.items) {
+          addStock(ci.productId, ci.quantity * item.quantity);
+        }
+        itemsData.push({
+          productId: null,
+          comboId: combo.id,
+          quantity: item.quantity,
+          price: combo.comboPrice,
+        });
+      }
+    }
+
+    // Kiểm tra tồn kho tổng hợp trước (thông báo lỗi rõ ràng).
+    for (const [pid, qty] of stockNeeded) {
+      const product = productMap.get(pid);
+      const stock = product?.stock ?? (await this.getStock(pid));
+      if (stock < qty) {
+        throw new BadRequestException(
+          `Sản phẩm "${product?.name ?? pid}" không đủ số lượng trong kho`,
+        );
+      }
+    }
 
     // Áp mã giảm giá (nếu có) — BE tự tính lại, không tin client.
     let discount = 0;
@@ -84,35 +160,30 @@ export class OrderService {
       const newOrder = await tx.order.create({
         data: {
           userId,
+          subtotal,
+          discount,
+          shippingFee: 0,
           totalPrice,
+          couponCode: dto.couponCode ?? null,
           shippingAddress: dto.shippingAddress,
           phone: dto.phone,
           note: dto.note,
           paymentMethod: dto.paymentMethod,
-          items: {
-            create: dto.items.map((item) => {
-              const product = productMap.get(item.productId)!;
-              return {
-                productId: item.productId,
-                quantity: item.quantity,
-                price: product.salePrice ?? product.price,
-              };
-            }),
-          },
+          items: { create: itemsData },
         },
         include: ORDER_INCLUDE,
       });
 
       // Trừ kho có điều kiện để chống oversell khi tải cao.
-      for (const item of dto.items) {
+      for (const [pid, qty] of stockNeeded) {
         const res = await tx.product.updateMany({
-          where: { id: item.productId, stock: { gte: item.quantity } },
-          data: { stock: { decrement: item.quantity } },
+          where: { id: pid, stock: { gte: qty } },
+          data: { stock: { decrement: qty } },
         });
         if (res.count === 0) {
-          const product = productMap.get(item.productId)!;
+          const product = productMap.get(pid);
           throw new BadRequestException(
-            `Sản phẩm "${product.name}" không đủ số lượng trong kho`,
+            `Sản phẩm "${product?.name ?? pid}" không đủ số lượng trong kho`,
           );
         }
       }
@@ -125,7 +196,33 @@ export class OrderService {
       await this.couponService.incrementUsage(dto.couponCode);
     }
 
+    // Gửi email xác nhận đơn (không chặn luồng nếu email lỗi).
+    if (order.user?.email) {
+      await this.mailService.sendOrderConfirmation(order.user.email, {
+        id: order.id,
+        totalPrice: order.totalPrice,
+        shippingAddress: order.shippingAddress,
+        items: order.items.map((it) => ({
+          name: it.product?.name ?? it.combo?.name ?? 'Sản phẩm',
+          quantity: it.quantity,
+          price: it.price,
+        })),
+      });
+    }
+
     return order;
+  }
+
+  /** Lấy tồn kho hiện tại của một sản phẩm (dùng cho sản phẩm con của combo). */
+  private async getStock(productId: string): Promise<number> {
+    const p = await this.prisma.product.findUnique({
+      where: { id: productId },
+      select: { stock: true },
+    });
+    if (!p) {
+      throw new NotFoundException(`Sản phẩm ${productId} trong combo không tồn tại`);
+    }
+    return p.stock;
   }
 
   /**
@@ -203,15 +300,90 @@ export class OrderService {
   }
 
   /**
-   * Cập nhật trạng thái đơn hàng (Admin)
+   * Cập nhật trạng thái đơn hàng (Admin).
+   * Ép luồng chuyển trạng thái hợp lệ và hoàn kho khi huỷ đơn.
    */
   async updateStatus(id: string, dto: UpdateOrderStatusDto) {
-    await this.findOne(id);
-    return this.prisma.order.update({
-      where: { id },
-      data: { status: dto.status },
-      include: ORDER_INCLUDE,
+    const order = await this.findOne(id);
+    return this.transitionStatus(order, dto.status);
+  }
+
+  /**
+   * Các trạng thái được phép chuyển tiếp từ một trạng thái cho trước.
+   * Huỷ chỉ khi đơn chưa giao (PENDING/CONFIRMED); đã giao/đã huỷ là trạng thái cuối.
+   */
+  private static readonly ALLOWED_TRANSITIONS: Record<
+    OrderStatus,
+    OrderStatus[]
+  > = {
+    PENDING: ['CONFIRMED', 'CANCELLED'],
+    CONFIRMED: ['SHIPPING', 'CANCELLED'],
+    SHIPPING: ['DELIVERED'],
+    DELIVERED: [],
+    CANCELLED: [],
+  };
+
+  /**
+   * Thực hiện chuyển trạng thái đơn hàng sau khi kiểm tra tính hợp lệ.
+   * Khi chuyển sang CANCELLED, hoàn lại tồn kho cho từng sản phẩm trong đơn
+   * (chạy trong cùng transaction để tránh lệch kho).
+   */
+  private async transitionStatus(
+    order: Prisma.OrderGetPayload<{ include: typeof ORDER_INCLUDE }>,
+    next: OrderStatus,
+  ) {
+    if (order.status === next) {
+      throw new BadRequestException('Đơn hàng đã ở trạng thái này');
+    }
+    const allowed = OrderService.ALLOWED_TRANSITIONS[order.status] ?? [];
+    if (!allowed.includes(next)) {
+      throw new BadRequestException(
+        `Không thể chuyển đơn từ "${order.status}" sang "${next}"`,
+      );
+    }
+
+    return this.prisma.$transaction(async (tx) => {
+      if (next === 'CANCELLED') {
+        // Gộp số lượng cần hoàn theo sản phẩm (item lẻ + sản phẩm con của combo).
+        const restore = new Map<string, number>();
+        const add = (pid: string, qty: number) =>
+          restore.set(pid, (restore.get(pid) ?? 0) + qty);
+
+        for (const item of order.items) {
+          if (item.productId) {
+            add(item.productId, item.quantity);
+          } else if (item.comboId) {
+            const comboItems = await tx.comboItem.findMany({
+              where: { comboId: item.comboId },
+            });
+            for (const ci of comboItems) {
+              add(ci.productId, ci.quantity * item.quantity);
+            }
+          }
+        }
+
+        for (const [pid, qty] of restore) {
+          await tx.product.update({
+            where: { id: pid },
+            data: { stock: { increment: qty } },
+          });
+        }
+      }
+      return tx.order.update({
+        where: { id: order.id },
+        data: { status: next },
+        include: ORDER_INCLUDE,
+      });
     });
+  }
+
+  /**
+   * Người dùng tự huỷ đơn của mình (chỉ khi đơn còn PENDING/CONFIRMED).
+   * Hoàn kho như luồng huỷ của admin.
+   */
+  async cancelByUser(id: string, userId: string) {
+    const order = await this.findOne(id, { userId, role: 'USER' });
+    return this.transitionStatus(order, 'CANCELLED');
   }
 
   /**

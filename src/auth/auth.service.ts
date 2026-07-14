@@ -9,6 +9,7 @@ import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
 import { randomBytes } from 'node:crypto';
 import { PrismaService } from '../prisma/prisma.service';
+import { MailService } from '../mail/mail.service';
 import { RegisterDto } from './dto/register.dto';
 import { LoginDto } from './dto/login.dto';
 
@@ -22,6 +23,7 @@ export class AuthService {
   constructor(
     private readonly prisma: PrismaService,
     private readonly jwtService: JwtService,
+    private readonly mailService: MailService,
   ) {}
 
   /**
@@ -59,6 +61,10 @@ export class AuthService {
     const isPasswordValid = await bcrypt.compare(dto.password, user.password);
     if (!isPasswordValid) {
       throw new UnauthorizedException('Email hoặc mật khẩu không chính xác');
+    }
+
+    if (!user.isActive) {
+      throw new UnauthorizedException('Tài khoản đã bị vô hiệu hoá');
     }
 
     const payload = { sub: user.id, email: user.email, role: user.role };
@@ -107,8 +113,11 @@ export class AuthService {
       data: { email, token, expiresAt },
     });
 
-    // Chỉ lộ token ngoài production để tiện test khi chưa có email.
-    if (process.env.NODE_ENV !== 'production') {
+    // Gửi link đặt lại mật khẩu qua email (Resend). Nuốt lỗi bên trong service.
+    await this.mailService.sendPasswordReset(email, token);
+
+    // Chỉ lộ token ngoài production để tiện test khi chưa cấu hình email thật.
+    if (process.env.NODE_ENV !== 'production' && !process.env.RESEND_API_KEY) {
       return { ...genericMsg, token };
     }
     return genericMsg;

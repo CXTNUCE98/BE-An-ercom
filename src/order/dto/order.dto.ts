@@ -13,9 +13,15 @@ import { Type } from 'class-transformer';
 import { OrderStatus, PaymentMethod } from '@prisma/client';
 
 export class OrderItemDto {
-  @ApiProperty({ description: 'ID sản phẩm' })
+  @ApiPropertyOptional({ description: 'ID sản phẩm (nếu là sản phẩm lẻ)' })
+  @IsOptional()
   @IsString()
-  readonly productId: string;
+  readonly productId?: string;
+
+  @ApiPropertyOptional({ description: 'ID combo (nếu là combo)' })
+  @IsOptional()
+  @IsString()
+  readonly comboId?: string;
 
   @ApiProperty({ example: 2 })
   @IsInt()

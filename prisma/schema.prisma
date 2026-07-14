@@ -1,6 +1,6 @@
 generator client {
-  provider        = "prisma-client-js"
-  binaryTargets   = ["native", "rhel-openssl-3.0.x", "debian-openssl-1.1.x"]
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "rhel-openssl-3.0.x", "debian-openssl-1.1.x"]
 }
 
 datasource db {
@@ -58,6 +58,7 @@ model User {
   reviews   Review[]
   wishlist  Wishlist[]
   addresses Address[]
+  cart      Cart?
 
   @@map("users")
 }
@@ -65,50 +66,51 @@ model User {
 // ─── Product ──────────────────────────────────────────────────────────────────
 
 model ProductCategory {
-  id          String    @id @default(uuid())
+  id          String   @id @default(uuid())
   name        String
-  slug        String    @unique
+  slug        String   @unique
   description String?
   image       String?
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 
-  products    Product[]
+  products Product[]
 
   @@map("product_categories")
 }
 
 model Product {
-  id           String        @id @default(uuid())
-  slug         String        @unique
+  id           String           @id @default(uuid())
+  slug         String           @unique
   name         String
   brand        String
   price        Int
   salePrice    Int?
   description  String?
-  images       String[]      @default([])
-  specs        Json          @default("[]")
-  tags         String[]      @default([])
-  rating       Float         @default(0)
-  reviewCount  Int           @default(0)
-  stock        Int           @default(0)
-  status       ProductStatus @default(ACTIVE)
-  isNew        Boolean       @default(false)
-  isBestSeller Boolean       @default(false)
-  isLuxury     Boolean       @default(false)
+  images       String[]         @default([])
+  specs        Json             @default("[]")
+  tags         String[]         @default([])
+  rating       Float            @default(0)
+  reviewCount  Int              @default(0)
+  stock        Int              @default(0)
+  status       ProductStatus    @default(ACTIVE)
+  isNew        Boolean          @default(false)
+  isBestSeller Boolean          @default(false)
+  isLuxury     Boolean          @default(false)
   videoUrl     String?
   videoPoster  String?
-  highlights   String[]      @default([])
+  highlights   String[]         @default([])
   categoryId   String?
   category     ProductCategory? @relation(fields: [categoryId], references: [id])
   deletedAt    DateTime?
-  createdAt    DateTime      @default(now())
-  updatedAt    DateTime      @updatedAt
+  createdAt    DateTime         @default(now())
+  updatedAt    DateTime         @updatedAt
 
-  orderItems   OrderItem[]
-  reviews      Review[]
-  wishlist     Wishlist[]
-  comboItems   ComboItem[]
+  orderItems OrderItem[]
+  reviews    Review[]
+  wishlist   Wishlist[]
+  comboItems ComboItem[]
+  cartItems  CartItem[]
 
   @@index([deletedAt])
   @@index([status])
@@ -125,7 +127,11 @@ model Order {
   id              String        @id @default(uuid())
   userId          String
   status          OrderStatus   @default(PENDING)
+  subtotal        Int           @default(0)
+  discount        Int           @default(0)
+  shippingFee     Int           @default(0)
   totalPrice      Int
+  couponCode      String?
   shippingAddress String
   phone           String
   note            String?
@@ -133,8 +139,8 @@ model Order {
   createdAt       DateTime      @default(now())
   updatedAt       DateTime      @updatedAt
 
-  user            User          @relation(fields: [userId], references: [id])
-  items           OrderItem[]
+  user  User        @relation(fields: [userId], references: [id])
+  items OrderItem[]
 
   @@index([userId])
   @@index([status])
@@ -145,30 +151,34 @@ model Order {
 model OrderItem {
   id        String  @id @default(uuid())
   orderId   String
-  productId String
+  // Một dòng đơn là sản phẩm lẻ (productId) hoặc combo (comboId) — đúng 1 trong 2.
+  productId String?
+  comboId   String?
   quantity  Int
   price     Int
 
-  order     Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
-  product   Product @relation(fields: [productId], references: [id])
+  order   Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  product Product? @relation(fields: [productId], references: [id])
+  combo   Combo?   @relation(fields: [comboId], references: [id])
 
   @@index([orderId])
   @@index([productId])
+  @@index([comboId])
   @@map("order_items")
 }
 
 model Review {
-  id        String   @id @default(uuid())
-  userId    String
-  productId String
-  rating    Int
-  comment   String?
-  isApproved Boolean @default(false)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id         String   @id @default(uuid())
+  userId     String
+  productId  String
+  rating     Int
+  comment    String?
+  isApproved Boolean  @default(false)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
 
-  user      User     @relation(fields: [userId], references: [id])
-  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  user    User    @relation(fields: [userId], references: [id])
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
 
   @@unique([userId, productId])
   @@index([productId])
@@ -177,19 +187,19 @@ model Review {
 }
 
 model Coupon {
-  id           String     @id @default(uuid())
-  code         String     @unique
-  type         CouponType @default(PERCENT)
-  value        Int
-  minOrder     Int        @default(0)
-  maxDiscount  Int?
-  usageLimit   Int?
-  usedCount    Int        @default(0)
-  startsAt     DateTime?
-  expiresAt    DateTime?
-  isActive     Boolean    @default(true)
-  createdAt    DateTime   @default(now())
-  updatedAt    DateTime   @updatedAt
+  id          String     @id @default(uuid())
+  code        String     @unique
+  type        CouponType @default(PERCENT)
+  value       Int
+  minOrder    Int        @default(0)
+  maxDiscount Int?
+  usageLimit  Int?
+  usedCount   Int        @default(0)
+  startsAt    DateTime?
+  expiresAt   DateTime?
+  isActive    Boolean    @default(true)
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
 
   @@map("coupons")
 }
@@ -202,8 +212,8 @@ model Wishlist {
   productId String
   createdAt DateTime @default(now())
 
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
 
   @@unique([userId, productId])
   @@index([userId])
@@ -228,7 +238,7 @@ model Address {
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([userId])
   @@map("addresses")
@@ -237,29 +247,31 @@ model Address {
 // ─── Combo / Bundle ───────────────────────────────────────────────────────────
 
 model Combo {
-  id           String      @id @default(uuid())
-  slug         String      @unique
-  name         String
-  description  String?
-  image        String?
-  comboPrice   Int
-  isActive     Boolean     @default(true)
-  createdAt    DateTime    @default(now())
-  updatedAt    DateTime    @updatedAt
+  id          String   @id @default(uuid())
+  slug        String   @unique
+  name        String
+  description String?
+  image       String?
+  comboPrice  Int
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 
-  items        ComboItem[]
+  items      ComboItem[]
+  orderItems OrderItem[]
+  cartItems  CartItem[]
 
   @@map("combos")
 }
 
 model ComboItem {
-  id        String  @id @default(uuid())
+  id        String @id @default(uuid())
   comboId   String
   productId String
-  quantity  Int     @default(1)
+  quantity  Int    @default(1)
 
-  combo     Combo   @relation(fields: [comboId], references: [id], onDelete: Cascade)
-  product   Product @relation(fields: [productId], references: [id])
+  combo   Combo   @relation(fields: [comboId], references: [id], onDelete: Cascade)
+  product Product @relation(fields: [productId], references: [id])
 
   @@index([comboId])
   @@map("combo_items")
@@ -268,13 +280,46 @@ model ComboItem {
 // ─── Password reset ─────────────────────────────────────────────────────────
 
 model PasswordResetToken {
-  id        String   @id @default(uuid())
+  id        String    @id @default(uuid())
   email     String
-  token     String   @unique
+  token     String    @unique
   expiresAt DateTime
   usedAt    DateTime?
-  createdAt DateTime @default(now())
+  createdAt DateTime  @default(now())
 
   @@index([email])
   @@map("password_reset_tokens")
+}
+
+// ─── Cart (giỏ hàng đồng bộ theo user) ────────────────────────────────────────
+
+model Cart {
+  id        String   @id @default(uuid())
+  userId    String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user  User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  items CartItem[]
+
+  @@map("carts")
+}
+
+model CartItem {
+  id        String   @id @default(uuid())
+  cartId    String
+  // Một dòng giỏ là sản phẩm lẻ (productId) hoặc combo (comboId) — đúng 1 trong 2.
+  productId String?
+  comboId   String?
+  quantity  Int      @default(1)
+  createdAt DateTime @default(now())
+
+  cart    Cart     @relation(fields: [cartId], references: [id], onDelete: Cascade)
+  product Product? @relation(fields: [productId], references: [id], onDelete: Cascade)
+  combo   Combo?   @relation(fields: [comboId], references: [id], onDelete: Cascade)
+
+  @@unique([cartId, productId])
+  @@unique([cartId, comboId])
+  @@index([cartId])
+  @@map("cart_items")
 }

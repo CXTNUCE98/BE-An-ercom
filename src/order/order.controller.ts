@@ -74,6 +74,12 @@ export class OrderController {
     return this.orderService.findOne(id, req.user);
   }
 
+  @Patch(':id/cancel')
+  @ApiOperation({ summary: 'Huỷ đơn hàng của tôi (chỉ khi chưa giao)' })
+  cancel(@Req() req: AuthenticatedRequest, @Param('id') id: string) {
+    return this.orderService.cancelByUser(id, req.user.userId);
+  }
+
   @Patch(':id/status')
   @UseGuards(RolesGuard)
   @Roles('ADMIN')
