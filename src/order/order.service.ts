@@ -8,6 +8,7 @@ import { Prisma, OrderStatus } from '@prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
 import { CouponService } from '../coupon/coupon.service';
 import { MailService } from '../mail/mail.service';
+import type { OrderEmailData } from '../mail/mail.templates';
 import {
   CreateOrderDto,
   UpdateOrderStatusDto,
@@ -198,19 +199,35 @@ export class OrderService {
 
     // Gửi email xác nhận đơn (không chặn luồng nếu email lỗi).
     if (order.user?.email) {
-      await this.mailService.sendOrderConfirmation(order.user.email, {
-        id: order.id,
-        totalPrice: order.totalPrice,
-        shippingAddress: order.shippingAddress,
-        items: order.items.map((it) => ({
-          name: it.product?.name ?? it.combo?.name ?? 'Sản phẩm',
-          quantity: it.quantity,
-          price: it.price,
-        })),
-      });
+      await this.mailService.sendOrderConfirmation(
+        order.user.email,
+        this.toEmailData(order),
+      );
     }
 
     return order;
+  }
+
+  /** Dựng dữ liệu email từ đơn hàng (dùng chung cho confirmation/status/payment). */
+  private toEmailData(
+    order: Prisma.OrderGetPayload<{ include: typeof ORDER_INCLUDE }>,
+  ): OrderEmailData {
+    return {
+      id: order.id,
+      subtotal: order.subtotal,
+      discount: order.discount,
+      shippingFee: order.shippingFee,
+      totalPrice: order.totalPrice,
+      couponCode: order.couponCode,
+      shippingAddress: order.shippingAddress,
+      phone: order.phone,
+      paymentMethod: order.paymentMethod,
+      items: order.items.map((it) => ({
+        name: it.product?.name ?? it.combo?.name ?? 'Sản phẩm',
+        quantity: it.quantity,
+        price: it.price,
+      })),
+    };
   }
 
   /** Lấy tồn kho hiện tại của một sản phẩm (dùng cho sản phẩm con của combo). */
@@ -342,7 +359,7 @@ export class OrderService {
       );
     }
 
-    return this.prisma.$transaction(async (tx) => {
+    const updated = await this.prisma.$transaction(async (tx) => {
       if (next === 'CANCELLED') {
         // Gộp số lượng cần hoàn theo sản phẩm (item lẻ + sản phẩm con của combo).
         const restore = new Map<string, number>();
@@ -375,6 +392,17 @@ export class OrderService {
         include: ORDER_INCLUDE,
       });
     });
+
+    // Gửi email báo trạng thái mới (ngoài transaction — email lỗi không rollback đơn).
+    if (updated.user?.email) {
+      await this.mailService.sendOrderStatus(
+        updated.user.email,
+        this.toEmailData(updated),
+        next,
+      );
+    }
+
+    return updated;
   }
 
   /**
